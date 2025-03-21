@@ -187,7 +187,7 @@ export default defineConfig({
       { text: '电脑推荐', link: '/laptops/', activeMatch: '/laptops/' },
       { text: '软件安装', link: '/softwares/', activeMatch: '/softwares/' },
       { text: '活动', link: '/activities/', activeMatch: '/activities/' },
-      { text: '关于科协', link: '/team', activeMatch: '//team' },
+      { text: '关于科协', link: '/team', activeMatch: '/team' },
     ],
 
     sidebar: {
