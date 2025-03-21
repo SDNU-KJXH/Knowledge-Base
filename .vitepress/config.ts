@@ -184,7 +184,7 @@ export default defineConfig({
         component: 'ReleaseTag'
       },
       { text: '电脑知识', link: '/knowledge/', activeMatch: '/knowledge/' },
-      { text: '电脑推荐', link: '/guide/', activeMatch: '/guide/' },
+      { text: '电脑推荐', link: '/laptops/', activeMatch: '/laptops/' },
       { text: '软件安装', link: '/softwares/', activeMatch: '/softwares/' },
       { text: '活动', link: '/activities/', activeMatch: '/activities/' },
       { text: '关于科协', link: '/team', activeMatch: '//team' },
@@ -278,10 +278,6 @@ export default defineConfig({
             {
               text: '插件 API',
               link: '/guide/api-plugin'
-            },
-            {
-              text: 'HMR API',
-              link: '/guide/api-hmr',
             },
             {
               text: 'JavaScript API',
