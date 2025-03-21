@@ -4,12 +4,22 @@ import placeholderAvatar from '/images/community/placeholder.jpg'
 
 const testimonials: Testimonial[] = [
   {
+<<<<<<< HEAD
     name: 'Churnie HXCN',
     handle: '@excnies',
     avatar:
       'https://hxcn.qcea.top/src/img/favicon.png',
     comment: [
       `我藏这里了嘿嘿嘿`,
+=======
+    name: 'Ryan Carniato',
+    handle: '@RyanCarniato',
+    avatar:
+      'https://pbs.twimg.com/profile_images/1810837163447308292/8Piov0f6_400x400.jpg',
+    comment: [
+      `I'm loving what Vite enables. We've found building SolidStart that it is less a metaframework but a system of symbiotic Vite plugins. While built with
+SolidJS in mind, they should scale from our simplest template to opinionated starter. We're building an ecosystem on Vite.`,
+>>>>>>> upstream/main
     ],
   },
   {
@@ -69,7 +79,11 @@ const testimonials: Testimonial[] = [
     name: 'Christoph Nakazawa',
     handle: '@cpojer',
     avatar:
+<<<<<<< HEAD
       'https://pbs.twimg.com/profile_images/1189537722286952449/OrscO0bD_400x400.jpg',
+=======
+      'https://pbs.twimg.com/profile_images/1854151427595407360/4GyUCgEH_400x400.jpg',
+>>>>>>> upstream/main
     comment: ['Vite is gonna eat the (JavaScript) world.'],
   },
   {
@@ -85,9 +99,15 @@ const testimonials: Testimonial[] = [
 
 <template>
   <section class="community-section">
+<<<<<<< HEAD
     <h2>这块不要也罢</h2>
     <h3>
       也可以把本届团队的照片写上去
+=======
+    <h2>深受社区喜爱</h2>
+    <h3>
+      不要只听我们说 —— 来听听 Vite 社区成员的声音
+>>>>>>> upstream/main
     </h3>
     <div class="community-grid-container">
       <div class="community-grid">

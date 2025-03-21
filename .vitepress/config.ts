@@ -39,6 +39,10 @@ const additionalTitle = ((): string => {
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
+      text: 'Vite 5 Docs',
+      link: 'https://v5.vite.dev',
+    },
+    {
       text: 'Vite 4 Docs',
       link: 'https://v4.vite.dev',
     },
@@ -57,7 +61,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Vite 5 Docs (release)',
+          text: 'Vite 6 Docs (release)',
           link: 'https://vite.dev',
         },
         ...oldVersions,
@@ -68,8 +72,10 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 })()
 
 export default defineConfig({
+
   title: 'SDNU 科技协会',
   description: '山东师范大学科技协会官方网站和知识库',
+
   lang: 'zh-CN',
 
   head: [
@@ -154,51 +160,61 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
 
-    algolia: {
-      appId: '7H67QR5P0A',
-      apiKey: '208bb9c14574939326032b937431014b',
-      indexName: 'vitejs',
-      searchParameters: {
-        facetFilters: ['tags:cn']
-      },
-      placeholder: '搜索文档',
-      translations: {
-        button: {
-          buttonText: '搜索'
+
+    search: {
+      provider: 'algolia', 
+      options: {
+        appId: '7H67QR5P0A',
+        apiKey: '208bb9c14574939326032b937431014b',
+        indexName: 'vitejs',
+        searchParameters: {
+          facetFilters: ['tags:cn']
         },
-        modal: {
-          searchBox: {
-            resetButtonTitle: '清除查询条件',
-            resetButtonAriaLabel: '清除查询条件',
-            cancelButtonText: '取消',
-            cancelButtonAriaLabel: '取消'
+        placeholder: '搜索文档',
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索'
           },
-          startScreen: {
-            recentSearchesTitle: '搜索历史',
-            noRecentSearchesText: '没有搜索历史',
-            saveRecentSearchButtonTitle: '保存到搜索历史',
-            removeRecentSearchButtonTitle: '从搜索历史中移除',
-            favoriteSearchesTitle: '收藏',
-            removeFavoriteSearchButtonTitle: '从收藏中移除'
-          },
-          errorScreen: {
-            titleText: '无法获取结果',
-            helpText: '你可能需要检查你的网络连接'
-          },
-          footer: {
-            selectText: '选择',
-            navigateText: '切换',
-            closeText: '关闭',
-            searchByText: '搜索供应商'
-          },
-          noResultsScreen: {
-            noResultsText: '无法找到相关结果',
-            suggestedQueryText: '你可以尝试查询',
-            reportMissingResultsText: '你认为这个查询应该有结果？',
-            reportMissingResultsLinkText: '向我们反馈'
+          modal: {
+            searchBox: {
+              resetButtonTitle: '清除查询条件',
+              resetButtonAriaLabel: '清除查询条件',
+              cancelButtonText: '取消',
+              cancelButtonAriaLabel: '取消'
+            },
+            startScreen: {
+              recentSearchesTitle: '搜索历史',
+              noRecentSearchesText: '没有搜索历史',
+              saveRecentSearchButtonTitle: '保存到搜索历史',
+              removeRecentSearchButtonTitle: '从搜索历史中移除',
+              favoriteSearchesTitle: '收藏',
+              removeFavoriteSearchButtonTitle: '从收藏中移除'
+            },
+            errorScreen: {
+              titleText: '无法获取结果',
+              helpText: '你可能需要检查你的网络连接'
+            },
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭',
+              searchByText: '搜索供应商'
+            },
+            noResultsScreen: {
+              noResultsText: '无法找到相关结果',
+              suggestedQueryText: '你可以尝试查询',
+              reportMissingResultsText: '你认为这个查询应该有结果？',
+              reportMissingResultsLinkText: '向我们反馈'
+            }
           }
-        }
-      },
+        },
+      }
+    },
+
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
     },
 
     // Using WwAds for China
@@ -211,6 +227,7 @@ export default defineConfig({
       message: `Released under the MIT License. (${commitRef})`,
       copyright:
           'Copyright © 1990-2024 山东师范大学科技协会'
+
     },
 
     nav: [
@@ -223,9 +240,10 @@ export default defineConfig({
       {
         text: '相关链接',
         items: [
-          { text: 'Team', link: '/team' },
-          { text: 'Blog', link: '/blog' },
-          { text: 'Releases', link: '/releases' },
+
+          { text: '团队成员', link: '/team' },
+          { text: '最新博客', link: '/blog' },
+          { text: '发布策略', link: '/releases' },
           {
             items: [
               {
@@ -269,8 +287,13 @@ export default defineConfig({
         ]
       },
       {
-        text: 'Version',
+
+        text: '历史版本',
         items: [
+          {
+            text: 'Vite v5 文档（英文）',
+            link: 'https://v5.vite.dev'
+          },
           {
             text: 'Vite v4 文档（英文）',
             link: 'https://v4.vite.dev'
@@ -290,22 +313,32 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
+
+          text: '介绍',
+          items: [
+            {
+              text: '开始',
+              link: '/guide/',
+            },
+            {
+              text: '理念',
+              link: '/guide/philosophy',
+            },
+            {
+              text: '为什么选 Vite',
+              link: '/guide/why',
+            },
+          ],
+        },
+        {
           text: '指引',
           items: [
             {
-              text: '为什么选 Vite',
-              link: '/guide/why'
-            },
-            {
-              text: '开始',
-              link: '/guide/'
-            },
-            {
               text: '功能',
-              link: '/guide/features'
+              link: '/guide/features',
             },
             {
-              text: '命令行界面',
+              text: '命令行接口',
               link: '/guide/cli'
             },
             {
@@ -341,20 +374,13 @@ export default defineConfig({
               link: '/guide/backend-integration'
             },
             {
-              text: '比较',
-              link: '/guide/comparisons'
-            },
-            {
+
               text: '故障排除',
-              link: '/guide/troubleshooting'
+              link: '/guide/troubleshooting',
             },
             {
               text: '性能',
               link: '/guide/performance',
-            },
-            {
-              text: '理念',
-              link: '/guide/philosophy',
             },
             {
               text: '从 v5 迁移',
@@ -495,12 +521,13 @@ export default defineConfig({
   },
   transformPageData(pageData) {
     const canonicalUrl = `${ogUrl}/${pageData.relativePath}`
-        .replace(/\/index\.md$/, '/')
-        .replace(/\.md$/, '/')
+
+      .replace(/\/index\.md$/, '/')
+      .replace(/\.md$/, '')
     pageData.frontmatter.head ??= []
     pageData.frontmatter.head.unshift(
-        ['link', { rel: 'canonical', href: canonicalUrl }],
-        ['meta', { property: 'og:title', content: pageData.title }],
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      ['meta', { property: 'og:title', content: pageData.title }],
     )
     return pageData
   },
@@ -529,4 +556,5 @@ export default defineConfig({
     },
   },
   buildEnd,
+
 })

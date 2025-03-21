@@ -14,7 +14,11 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
+<<<<<<< HEAD
 例如，`imgUrl` 在开发时会是 `/img.png`，在生产构建后会是 `/assets/img.2d8efhg.png`。
+=======
+例如，`imgUrl` 在开发时会是 `/src/img.png`，在生产构建后会是 `/assets/img.2d8efhg.png`。
+>>>>>>> upstream/main
 
 行为类似于 Webpack 的 `file-loader`。区别在于导入既可以使用绝对公共路径（基于开发期间的项目根路径），也可以使用相对路径。
 
@@ -46,7 +50,11 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 ### 显式 URL 引入 {#explicit-url-imports}
 
+<<<<<<< HEAD
 未被包含在内部列表或 `assetsInclude` 中的资源，可以使用 `?url` 后缀显式导入为一个 URL。这十分有用，例如，要导入 [Houdini Paint Worklets](https://houdini.how/usage) 时：
+=======
+未被包含在内部列表或 `assetsInclude` 中的资源，可以使用 `?url` 后缀显式导入为一个 URL。这十分有用，例如，要导入 [Houdini Paint Worklets](https://developer.mozilla.org/en-US/docs/Web/API/CSS/paintWorklet_static) 时：
+>>>>>>> upstream/main
 
 ```js twoslash
 import 'vite/client'
@@ -55,6 +63,20 @@ import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
+<<<<<<< HEAD
+=======
+### 显式内联处理 {#explicit-inline-handling}
+
+可以分别使用`?inline`或`?no-inline`后缀，明确导入带内联或不带内联的静态资源。
+
+```js twoslash
+import 'vite/client'
+// ---cut---
+import imgUrl1 from './img.svg?no-inline'
+import imgUrl2 from './img.png?inline'
+```
+
+>>>>>>> upstream/main
 ### 将资源引入为字符串 {#importing-asset-as-string}
 
 资源可以使用 `?raw` 后缀声明作为字符串引入。
@@ -124,6 +146,10 @@ document.getElementById('hero-img').src = imgUrl
 
 ```js
 function getImageUrl(name) {
+<<<<<<< HEAD
+=======
+  // 请注意，这不包括子目录中的文件
+>>>>>>> upstream/main
   return new URL(`./dir/${name}.png`, import.meta.url).href
 }
 ```
@@ -135,6 +161,28 @@ function getImageUrl(name) {
 const imgUrl = new URL(imagePath, import.meta.url).href
 ```
 
+<<<<<<< HEAD
+=======
+::: details 工作原理
+
+Vite 会将 `getImageUrl` 函数改造为：
+
+```js
+import __img0png from './dir/img0.png'
+import __img1png from './dir/img1.png'
+
+function getImageUrl(name) {
+  const modules = {
+    './dir/img0.png': __img0png,
+    './dir/img1.png': __img1png,
+  }
+  return new URL(modules[`./dir/${name}.png`], import.meta.url).href
+}
+```
+
+:::
+
+>>>>>>> upstream/main
 ::: warning 注意：无法在 SSR 中使用
 如果你正在以服务端渲染模式使用 Vite 则此模式不支持，因为 `import.meta.url` 在浏览器和 Node.js 中有不同的语义。服务端的产物也无法预先确定客户端主机 URL。
 :::

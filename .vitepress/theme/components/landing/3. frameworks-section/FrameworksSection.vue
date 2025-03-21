@@ -26,6 +26,10 @@ import logoLaravel from './images/laravel.svg'
 import logoAdonis from './images/adonis.svg'
 import logoEmber from './images/ember.svg'
 import logoPreact from './images/preact.svg'
+<<<<<<< HEAD
+=======
+import logoHono from './images/hono.svg'
+>>>>>>> upstream/main
 
 /**
  * The frameworks and tools to display in this section.
@@ -164,6 +168,16 @@ const frameworks: Framework[] = [
     url: 'https://emberjs.com/',
     visible: ref(false),
   },
+<<<<<<< HEAD
+=======
+  {
+    name: 'Hono',
+    logo: logoHono,
+    color: '#ff5c13',
+    url: 'https://hono.dev/',
+    visible: ref(false),
+  },
+>>>>>>> upstream/main
 ]
 
 // Starting parameters
@@ -306,7 +320,11 @@ const rowStyle: ComputedRef<{ transform: string }> = computed(() => {
 
 <template>
   <section class="frameworks-section" id="frameworks-section">
+<<<<<<< HEAD
     <h2>我们精通软件的安装和卸载</h2>
+=======
+    <h2>支持你喜爱的框架和工具</h2>
+>>>>>>> upstream/main
     <div class="frameworks-container">
       <!-- Top Row -->
       <div class="framework-row" :style="rowStyle">

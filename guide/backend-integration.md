@@ -12,6 +12,15 @@
    import { defineConfig } from 'vite'
    // ---cut---
    export default defineConfig({
+<<<<<<< HEAD
+=======
+     server: {
+       cors: {
+         // 通过浏览器访问的源
+         origin: 'http://my-backend.example.com',
+       },
+     },
+>>>>>>> upstream/main
      build: {
        // 在 outDir 中生成 .vite/manifest.json
        manifest: true,
@@ -98,6 +107,10 @@
    - 清单是一个 `Record<name, chunk>` 结构的对象。
    - 对于 入口 或动态入口 chunk，键是相对于项目根目录的资源路径。
    - 对于非入口 chunk，键是生成文件的名称并加上前缀 `_`。
+<<<<<<< HEAD
+=======
+   - 当 [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) 为 `false` 时生成的 CSS 文件，键为 `style.css`。
+>>>>>>> upstream/main
    - Chunk 将信息包含在其静态和动态导入上（两者都是映射到清单中相应 chunk 的键），以及任何与之相关的 CSS 和资源文件。
 
 4. 你可以利用这个文件来渲染带有哈希文件名的链接或预加载指令。

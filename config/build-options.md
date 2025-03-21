@@ -162,10 +162,35 @@ Git LFS 占位符会自动排除在内联之外，因为它们不包含其所表
 
 ## build.lib {#build-lib}
 
+<<<<<<< HEAD
 - **类型：** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
 - **相关内容：** [库模式](/guide/build#library-mode)
 
 构建为库。`entry` 是必需的，因为库不能使用 HTML 作为入口。`name` 则是暴露的全局变量，并且在 `formats` 包含 `'umd'` 或 `'iife'` 时是必需的。默认 `formats` 是 `['es', 'umd']`，如果使用了多个配置入口，则是 `['es', 'cjs']`。`fileName` 是输出的包文件名，默认 `fileName` 是 `package.json` 的 `name` 选项，同时，它还可以被定义为参数为 `format` 和 `entryName` 的函数。
+=======
+- **类型：** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
+- **相关内容：** [库模式](/guide/build#library-mode)
+
+以库的形式构建。`entry` 是必需的，因为库不能使用 HTML 作为入口。`name` 是暴露的全局变量，当 `formats` 包括 `'umd'` 或 `'iife'` 时必须使用。默认的 `formats` 为 `['es'、'umd']`，如果使用多个入口，则为 `['es'、'cjs']`。
+
+`fileName` 是软件包输出文件的名称，默认为 `package.json` 中的 `"name"`。它也可以定义为以 `format` 和 `entryName` 为参数的函数，并返回文件名。
+
+如果软件包导入了 CSS，`cssFileName` 可用于指定 CSS 输出文件的名称。如果设置为字符串，则默认值与 `fileName` 相同，否则也会返回到 `package.json` 中的 `"name"`。
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: ['src/main.js'],
+      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
+      cssFileName: 'my-lib-style',
+    },
+  },
+})
+```
+>>>>>>> upstream/main
 
 ## build.manifest {#build-manifest}
 
@@ -173,7 +198,13 @@ Git LFS 占位符会自动排除在内联之外，因为它们不包含其所表
 - **默认：** `false`
 - **相关内容：** [后端集成](/guide/backend-integration)
 
+<<<<<<< HEAD
 当设置为 `true`，构建后将会生成 `.vite/manifest.json` 文件，包含了没有被 hash 过的资源文件名和 hash 后版本的映射。可以为一些服务器框架渲染时提供正确的资源引入链接。当该值为一个字符串时，它将作为 manifest 文件的名字。
+=======
+是否生成一个 manifest 文件，包含了没有被 hash 过的资源文件名和 hash 后版本的映射，然后服务器框架可使用该映射来呈现正确的资源引入链接。
+
+当值为字符串时，将用作相对于 `build.outDir` 的 manifest 文件路径。设置为 `true` 时，路径将是 `.vite/manifest.json`。
+>>>>>>> upstream/main
 
 ## build.ssrManifest {#build-ssrmanifest}
 
@@ -181,7 +212,13 @@ Git LFS 占位符会自动排除在内联之外，因为它们不包含其所表
 - **默认值：** `false`
 - **相关链接：** [服务端渲染](/guide/ssr)
 
+<<<<<<< HEAD
 当设置为 `true` 时，构建也将生成 SSR 的 manifest 文件，以确定生产中的样式链接与资产预加载指令。当该值为一个字符串时，它将作为 manifest 文件的名字。
+=======
+是否生成 SSR 的 manifest 文件，以确定生产中的样式链接与资源预加载指令。
+
+当值为字符串时，将用作相对于 `build.outDir` 的 manifest 文件路径。设置为 `true` 时，路径将是 `.vite/ssr-manifest.json`。
+>>>>>>> upstream/main
 
 ## build.ssr {#build-ssr}
 

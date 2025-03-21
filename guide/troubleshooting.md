@@ -64,6 +64,18 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 - 在邻近的 `package.json` 中添加 `"type": "module"`
 - 将 `vite.config.js`/`vite.config.ts` 重命名为 `vite.config.mjs`/`vite.config.mts`
 
+<<<<<<< HEAD
+=======
+### `failed to load config from '/path/to/config*/vite.config.js'`
+
+> failed to load config from '/path/to/config\*/vite.config.js'
+> error when starting dev server:
+> Error: Build failed with 1 error:
+> error: Must use "outdir" when there are multiple input files
+
+如果项目文件夹的路径中包含 `*`，则可能会发生上述错误，因为 esbuild 将其视为一个 glob 模式。你需要重命名你的目录以移除 `*`。
+
+>>>>>>> upstream/main
 ## 开发服务器 {#dev-server}
 
 ### 请求始终停滞 {#requests-are-stalled-forever}
@@ -102,6 +114,12 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 
 请注意，这些配置会持久作用，但需要 **重新启动**。
 
+<<<<<<< HEAD
+=======
+或者，如果服务器在 VS Code devcontainer 中运行，请求可能会出现停滞。要修复此问题，请参阅
+[Dev Containers / VS Code Port Forwarding](#dev-containers-vs-code-port-forwarding)。
+
+>>>>>>> upstream/main
 ### 网络请求停止加载 {#network-requests-stop-loading}
 
 使用自签名SSL证书时，Chrome 会忽略所有缓存指令并重新加载内容。而 Vite 依赖于这些缓存指令。
@@ -130,7 +148,19 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 要避免这个问题，请尝试减小请求头大小。举个例子，如果 cookie 太长，请删除它。或者你可以使用 [`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) 来更改最大请求头大小。
 
+<<<<<<< HEAD
 ## HMR {#hmr}
+=======
+### 开发容器 / VS Code 端口转发
+
+如果你正在使用开发容器或 VS Code 的端口转发功能，可能需要在配置中将 [`server.host`](/config/server-options.md#server-host) 选项设置为 `127.0.0.1` 才能使其正常工作。
+
+这是因为 [VS Code 的端口转发功能不支持 IPv6](https://github.com/microsoft/vscode-remote-release/issues/7029)。
+
+更多详情请参阅 [#16522](https://github.com/vitejs/vite/issues/16522)。
+
+## HMR
+>>>>>>> upstream/main
 
 ### Vite 检测到文件变化，但 HMR 不工作 {#vite-detects-a-file-change-but-the-hmr-is-not-working}
 

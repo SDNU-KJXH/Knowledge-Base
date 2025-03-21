@@ -182,9 +182,15 @@ onUnmounted(() => {
       <div class="connection-line" :class="{ active: commandTriggered }" />
     </div>
     <div class="feature__meta">
+<<<<<<< HEAD
       <div class="meta__title">丰富的资源</div>
       <div class="meta__description">
         我们拥有丰富的电脑知识、各类软件资源
+=======
+      <div class="meta__title">极速的服务启动</div>
+      <div class="meta__description">
+        使用原生 ESM 文件，无需打包
+>>>>>>> upstream/main
       </div>
     </div>
   </div>
@@ -342,7 +348,12 @@ onUnmounted(() => {
       bottom: 0;
       height: 100%;
       border-radius: 12px 0 0 12px;
+<<<<<<< HEAD
       background: url('/noise.png'),
+=======
+      background:
+        url('/noise.png'),
+>>>>>>> upstream/main
         radial-gradient(
           ellipse 140% 80% at 96% bottom,
           #13b351 0%,

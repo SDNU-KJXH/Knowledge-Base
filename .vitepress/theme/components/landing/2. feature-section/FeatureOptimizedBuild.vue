@@ -436,9 +436,15 @@ const { startAnimation } = useCardAnimation(
       </svg>
     </div>
     <div class="feature__meta meta--center">
+<<<<<<< HEAD
       <div class="meta__title">线上义诊</div>
       <div class="meta__description">
         为大家提供全流程、周到的服务
+=======
+      <div class="meta__title">优化后的构建</div>
+      <div class="meta__description">
+        可选 “多页应用” 或 “库” 模式的预配置 Rollup 构建
+>>>>>>> upstream/main
       </div>
     </div>
   </div>

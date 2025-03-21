@@ -1,14 +1,22 @@
 # 用于框架的环境 API {#environment-api-for-frameworks}
 
 :::warning 实验性
+<<<<<<< HEAD
 这个 API 的初始版本在 Vite 5.1 中以 "Vite Runtime API" 的名字被引入。这份指南介绍了经过修订后的 API，被重新命名为环境 API（Environment API）。这个 API 将在 Vite 6 中作为实验性功能发布。你现在已经可以在最新的 `vite@6.0.0-beta.x` 版本中进行测试。
+=======
+环境 API 是实验性的。在 Vite 6 期间，我们将保持这些 API 的稳定，以便生态系统可以在其基础上进行实验和构建。我们计划在 Vite 7 中稳定这些新 API，并可能进行一些重大更改。
+>>>>>>> upstream/main
 
 资料：
 
 - [反馈讨论](https://github.com/vitejs/vite/discussions/16358) 我们在此处收集新 API 的反馈。
 - [环境 API PR](https://github.com/vitejs/vite/pull/16471) 新 API 在此处被实现并进行了审查。
 
+<<<<<<< HEAD
 在参与测试这个提议的过程中，请与我们分享您的反馈。
+=======
+请与我们分享您的反馈。
+>>>>>>> upstream/main
 :::
 
 ## 环境和框架 {#environments-and-frameworks}
@@ -22,7 +30,12 @@ export class RunnableDevEnvironment extends DevEnvironment {
 
 class ModuleRunner {
   /**
+<<<<<<< HEAD
    * 要执行的 URL。可以接受文件路径，服务器路径，或者相对于根路径的 id。
+=======
+   * 要执行的 URL。
+   * 可以接受文件路径，服务器路径，或者相对于根路径的 id。
+>>>>>>> upstream/main
    * 返回一个实例化的模块（和 ssrLoadModule 中的一样）
    */
   public async import(url: string): Promise<Record<string, any>>
@@ -45,27 +58,51 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 假设我们有一个配置为中间件模式的 Vite 服务器，如 [SSR 设置指南](/guide/ssr#setting-up-the-dev-server) 所述，我们可以使用环境 API 来实现 SSR 中间件。省略了错误处理。
 
 ```js
+<<<<<<< HEAD
 import { createServer } from 'vite'
 
+=======
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { createServer } from 'vite'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+>>>>>>> upstream/main
 const server = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
   environments: {
     server: {
+<<<<<<< HEAD
       // 默认情况下，模块在开发过程中与 vite 开发服务器在同一进程中运行
+=======
+      // 默认情况下，模块与 vite 开发服务器在同一进程中运行
+>>>>>>> upstream/main
     },
   },
 })
 
+<<<<<<< HEAD
 // 在 TypeScript 中，你可能需要将这个转换为 RunnableDevEnvironment，或者使用
 // "isRunnableDevEnvironment" 函数来保护对运行器的访问
+=======
+// 在 TypeScript 中，你可能需要将这个转换为 RunnableDevEnvironment，或者
+// 使用 "isRunnableDevEnvironment" 来保护对运行器的访问
+>>>>>>> upstream/main
 const environment = server.environments.node
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
   // 1. 读取 index.html
+<<<<<<< HEAD
   let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
+=======
+  const indexHtmlPath = path.resolve(__dirname, 'index.html')
+  let template = fs.readFileSync(indexHtmlPath, 'utf-8')
+>>>>>>> upstream/main
 
   // 2. 应用 Vite HTML 转换。这将注入 Vite HMR 客户端，
   //    并应用来自 Vite 插件的 HTML 转换，例如
@@ -112,7 +149,11 @@ const server = createServer()
 const ssrEnvironment = server.environment.ssr
 const input = {}
 
+<<<<<<< HEAD
 const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
+=======
+const { createHandler } = await ssrEnvironment.runner.import('./entry.js')
+>>>>>>> upstream/main
 const handler = createHandler(input)
 const response = handler(new Request('/'))
 
@@ -186,10 +227,17 @@ function vitePluginVirtualIndexHtml(): Plugin {
         let html: string
         if (server) {
           this.addWatchFile('index.html')
+<<<<<<< HEAD
           html = await fs.promises.readFile('index.html', 'utf-8')
           html = await server.transformIndexHtml('/', html)
         } else {
           html = await fs.promises.readFile('dist/client/index.html', 'utf-8')
+=======
+          html = fs.readFileSync('index.html', 'utf-8')
+          html = await server.transformIndexHtml('/', html)
+        } else {
+          html = fs.readFileSync('dist/client/index.html', 'utf-8')
+>>>>>>> upstream/main
         }
         return `export default ${JSON.stringify(html)}`
       }
@@ -264,7 +312,11 @@ export function createHandler(input) {
 
 ## 构建过程中的环境 {#environments-during-build}
 
+<<<<<<< HEAD
 在命令行界面，调用 `vite build` 和 `vite build --ssr` 仍将只构建客户端和仅 ssr 环境以保证向后兼容性。
+=======
+在命令行接口中，调用 `vite build` 和 `vite build --ssr` 仍将只构建客户端和仅 ssr 环境以保证向后兼容性。
+>>>>>>> upstream/main
 
 当 `builder` 未 `undefined` 时（或者调用 `vite build --app`）时，`vite build` 将选择构建整个应用。这将在未来的主要版本中成为默认设置。将创建一个 `ViteBuilder` 实例（构建时等同于 `ViteDevServer`），用于为生产环境构建所有配置的环境。默认情况下，环境的构建按照 `environments` 记录的顺序依次运行。框架或用户可以进一步配置环境的构建方式，使用：
 

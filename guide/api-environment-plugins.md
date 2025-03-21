@@ -1,14 +1,22 @@
 # 用于插件的环境 API {#environment-api-for-plugins}
 
 :::warning 实验性
+<<<<<<< HEAD
 这个 API 的初始版本在 Vite 5.1 中以 "Vite Runtime API" 的名字被引入。这份指南介绍了经过修订后的 API，被重新命名为环境 API（Environment API）。这个 API 将在 Vite 6 中作为实验性功能发布。你现在已经可以在最新的 `vite@6.0.0-beta.x` 版本中进行测试。
+=======
+环境 API 是实验性的。在 Vite 6 期间，我们将保持这些 API 的稳定，以便生态系统可以在其基础上进行实验和构建。我们计划在 Vite 7 中稳定这些新 API，并可能进行一些重大更改。
+>>>>>>> upstream/main
 
 资料：
 
 - [反馈讨论](https://github.com/vitejs/vite/discussions/16358) 我们在此处收集新 API 的反馈。
 - [环境 API PR](https://github.com/vitejs/vite/pull/16471) 新 API 在此处被实现并进行了审查。
 
+<<<<<<< HEAD
 在参与测试这个提议的过程中，请与我们分享您的反馈。
+=======
+请与我们分享您的反馈。
+>>>>>>> upstream/main
 :::
 
 ## 在钩子中访问当前环境 {#accessing-the-current-environment-in-hooks}
@@ -58,7 +66,11 @@ Vite 服务器有一个共享的插件管道，但在处理模块时，它总是
 `hotUpdate` 钩子允许插件为特定环境执行自定义的 HMR 更新处理。当一个文件发生变化时，会按照 `server.environments` 中的顺序为每个环境依次运行 HMR 算法，因此 `hotUpdate` 钩子会被多次调用。这个钩子会接收一个带有以下签名的上下文对象：
 
 ```ts
+<<<<<<< HEAD
 interface HotUpdateContext {
+=======
+interface HotUpdateOptions {
+>>>>>>> upstream/main
   type: 'create' | 'update' | 'delete'
   file: string
   timestamp: number
@@ -67,6 +79,10 @@ interface HotUpdateContext {
   server: ViteDevServer
 }
 ```
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/main
 - `this.environment` 是当前正在处理文件更新的模块执行环境。
 
 - `modules` 是由于文件更改而受影响的此环境中的模块的数组。它是一个数组，因为一个文件可能映射到多个服务的模块（例如 Vue SFCs）。
@@ -125,23 +141,40 @@ interface HotUpdateContext {
   }
   ```
 
+<<<<<<< HEAD
 ## 分环境的插件 {#per-environment-plugins}
 
 插件可以使用 `applyToEnvironment` 函数定义其应适用于哪些环境。
+=======
+## 基于环境的插件 {#per-environment-plugins}
+
+插件可以使用 `applyToEnvironment` 函数来定义它适用的环境。
+>>>>>>> upstream/main
 
 ```js
 const UnoCssPlugin = () => {
   // 共享的全局状态
   return {
     buildStart() {
+<<<<<<< HEAD
       // 使用 WeakMap<Environment, Data>，this.environment 初始化每个环境的状态
+=======
+      // 使用 Wea​​kMap<Environment,Data> 初始化每个环境状态
+      // 使用 this.environment
+>>>>>>> upstream/main
     },
     configureServer() {
       // 正常使用全局钩子
     },
     applyToEnvironment(environment) {
+<<<<<<< HEAD
       // 如果这个插件应该在这个环境中激活，则返回 true
       // 如果没有提供这个函数，则插件在所有环境中都是激活的
+=======
+      // 如果此插件应在此环境中激活，则返回 true
+      // 或返回一个新插件来替代它。
+      // 如果不使用这个 hook，则插件在所有环境中都是激活的
+>>>>>>> upstream/main
     },
     resolveId(id, importer) {
       // 只对此插件适用的环境进行调用
@@ -150,6 +183,40 @@ const UnoCssPlugin = () => {
 }
 ```
 
+<<<<<<< HEAD
+=======
+如果一个插件没有环境感知功能，并且其状态没有基于当前环境进行区分，`applyToEnvironment` 钩子可以轻松地将其设置为针对每个环境工作。
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+
+export default defineConfig({
+  plugins: [
+    {
+      name: 'per-environment-plugin',
+      applyToEnvironment(environment) {
+        return nonShareablePlugin({ outputName: environment.name })
+      },
+    },
+  ],
+})
+```
+
+Vite 输出了一个 `perEnvironmentPlugin` 助手，以简化这些不需要其他钩子的情况：
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+
+export default defineConfig({
+  plugins: [
+    perEnvironmentPlugin('per-environment-plugin', (environment) =>
+      nonShareablePlugin({ outputName: environment.name }),
+    ),
+  ],
+})
+```
+
+>>>>>>> upstream/main
 ## 构建钩子中的环境 {#environment-in-build-hooks}
 
 与开发期间一样，插件钩子在构建期间也接收环境实例，取代了 `ssr` 布尔值。
@@ -166,7 +233,11 @@ const UnoCssPlugin = () => {
 
 在未来的主要版本（Vite 7 或 8）中，我们的目标是完全对齐：
 
+<<<<<<< HEAD
 - **在开发和构建期间：** 插件是共享的，并具有[按环境的过滤](#per-environment-plugins)
+=======
+- **在开发和构建期间：** 插件是共享的，并可以 [根据环境进行过滤](#per-environment-plugins)
+>>>>>>> upstream/main
 
 在构建期间还会共享一个单一的 `ResolvedConfig` 实例，允许在整个应用构建过程中进行缓存，类似于我们在开发期间使用 `WeakMap<ResolvedConfig, CachedData>` 的方式。
 

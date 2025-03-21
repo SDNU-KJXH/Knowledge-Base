@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 服务端渲染 {#server-side-rendering}
+=======
+# 服务端渲染 (SSR) {#server-side-rendering}
+>>>>>>> upstream/main
 
 :::tip 注意
 SSR 特别指支持在 Node.js 中运行相同应用程序的前端框架（例如 React、Preact、Vue 和 Svelte），将其预渲染成 HTML，最后在客户端进行水合处理。如果你正在寻找与传统服务器端框架的集成，请查看 [后端集成指南](./backend-integration)。
@@ -12,10 +16,13 @@ SSR 特别指支持在 Node.js 中运行相同应用程序的前端框架（例�
 目前，Vite 正在用 [环境 API](https://github.com/vitejs/vite/discussions/16358) 来改进 SSR API。查看链接了解更多详情。
 :::
 
+<<<<<<< HEAD
 :::tip 帮助
 如果你有疑问，可以到社区 [Discord 的 Vite #ssr 频道](https://discord.gg/PkbxgzPhJv)，这里会帮到你。
 :::
 
+=======
+>>>>>>> upstream/main
 ## 示例项目 {#example-projects}
 
 Vite 为服务端渲染（SSR）提供了内建支持。[`create-vite-extra`](https://github.com/bluwy/create-vite-extra) 包含了一些你可以用作参考的SSR设置示例：
@@ -67,7 +74,11 @@ if (import.meta.env.SSR) {
 
 ## 设置开发服务器 {#setting-up-the-dev-server}
 
+<<<<<<< HEAD
 在构建 SSR 应用程序时，你可能希望完全控制主服务器，并将 Vite 与生产环境脱钩。因此，建议以中间件模式使用 Vite。下面是一个关于 [express](https://expressjs.com/) 的例子：
+=======
+在构建 SSR 应用程序时，你可能希望完全控制主服务器，并将 Vite 与生产环境脱钩。因此，建议以中间件模式使用 Vite。下面是一个关于 [express](https://expressjs.com/) (v4) 的例子：
+>>>>>>> upstream/main
 
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
@@ -149,7 +160,11 @@ app.use('*', async (req, res, next) => {
     const appHtml = await render(url)
 
     // 5. 注入渲染后的应用程序 HTML 到模板中。
+<<<<<<< HEAD
     const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+=======
+    const html = template.replace(`<!--ssr-outlet-->`, () => appHtml)
+>>>>>>> upstream/main
 
     // 6. 返回渲染后的 HTML。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)

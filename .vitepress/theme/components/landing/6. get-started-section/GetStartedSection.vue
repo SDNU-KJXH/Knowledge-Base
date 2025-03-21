@@ -109,9 +109,15 @@
       </svg>
       <img src="/logo.svg" alt="Vite Logo" class="vite-chip__logo" />
     </div>
+<<<<<<< HEAD
     <h2>开启电脑世界的探索之旅叭</h2>
     <h3>
       ↓开始探索↓
+=======
+    <h2>使用 Vite 开始构建</h2>
+    <h3>
+      准备好迎接一个能跟上您思维速度的开发环境
+>>>>>>> upstream/main
     </h3>
     <a href="/guide/" class="btn btn--primary">开始</a>
     <div class="glow glow--purple" />
