@@ -28,7 +28,7 @@ Vite 6 正式引入了环境（Environments）的概念。在 Vite 5 之前，�
 
 Vite 6 允许用户在构建和开发过程中配置应用程序，以映射其所有环境。在开发期间，一个 Vite 开发服务器现在可用于在多个不同环境中同时运行代码。应用程序源代码仍由 Vite 开发服务器进行转换。在共享 HTTP 服务器、中间件、解析配置和插件管道的基础上，Vite 开发服务器现在拥有一组独立的开发环境。每个开发环境的配置都尽可能与生产环境相匹配，并连接到执行代码的开发运行时（对于 Workerd，服务器代码现在可以在本地 miniflare 中运行）。在客户端，浏览器导入并执行代码。在其他环境中，模块运行程序会获取并评估转换后的代码。
 
-![Vite Environments](../images/vite-environments.svg)
+![Vite Environments](../images/archives/vite-environments.svg)
 
 ## 环境配置 {#environments-configuration}
 

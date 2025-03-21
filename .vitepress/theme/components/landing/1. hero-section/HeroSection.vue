@@ -12,7 +12,7 @@ import HeroDiagram from './HeroDiagram.vue'
         target="_blank"
       >
         <img src="/viteconf.svg" alt="Viteconf logo" width="20" height="20" />
-        <span>电脑义诊活动将于11月45日举行</span>
+        <span>点击使用免费的满血版DeepSeek R1</span>
       </a>
 
       <!-- Heading -->
