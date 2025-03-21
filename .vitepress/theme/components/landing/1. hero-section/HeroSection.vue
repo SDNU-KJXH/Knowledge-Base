@@ -25,7 +25,7 @@ import HeroDiagram from './HeroDiagram.vue'
       <!-- CTA Buttons -->
       <div class="hero__actions">
         <a href="/knowledge/" class="btn btn--primary">电脑知识</a>
-        <a href="/guide/" class="btn btn--primary">购买指南</a>
+        <a href="/laptops/" class="btn btn--primary">购买指南</a>
         <a href="/softwares/" class="btn btn--primary">软件推荐</a>
         <a href="/activities/" class="btn btn--primary">科协活动</a>
         <a

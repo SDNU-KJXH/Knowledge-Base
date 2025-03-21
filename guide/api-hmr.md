@@ -11,7 +11,7 @@ Vite 通过特殊的 `import.meta.hot` 对象暴露手动 HMR API。
 ```ts twoslash
 import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 import type {
-  CustomEventName,
+  CustomEventMap,
   InferCustomEventPayload,
 } from 'vite/types/customEvent.d.ts'
 
@@ -35,15 +35,21 @@ interface ViteHotContext {
   prune(cb: (data: any) => void): void
   invalidate(message?: string): void
 
-  on<T extends CustomEventName>(
+  on<
+    T extends keyof CustomEventMap // ✅ 修改这里！
+  >(
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
-  off<T extends CustomEventName>(
+  off<
+    T extends keyof CustomEventMap // ✅ 修改这里！
+  >(
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
-  send<T extends CustomEventName>(
+  send<
+    T extends keyof CustomEventMap // ✅ 修改这里！
+  >(
     event: T,
     data?: InferCustomEventPayload<T>,
   ): void
