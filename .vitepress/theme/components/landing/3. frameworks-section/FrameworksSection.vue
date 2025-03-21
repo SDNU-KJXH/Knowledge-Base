@@ -7,163 +7,249 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 // Framework assets
-import logoAstro from './images/astro.svg'
-import logoNuxt from './images/nuxt.svg'
-import logoVue from './images/vue.svg'
-import logoAnalog from './images/analog.svg'
-import logoPlaywright from './images/playwright.svg'
-import logoMarko from './images/marko.svg'
-import logoStorybook from './images/storybook.svg'
-import logoQwik from './images/qwik.svg'
-import logoVitest from './images/vitest.svg'
-import logoRedwood from './images/redwood.svg'
-import logoSolid from './images/solid.svg'
-import logoAngular from './images/angular.svg'
-import logoReact from './images/react.svg'
-import logoRemix from './images/remix.svg'
-import logoSvelte from './images/svelte.svg'
-import logoLaravel from './images/laravel.svg'
-import logoAdonis from './images/adonis.svg'
-import logoEmber from './images/ember.svg'
-import logoPreact from './images/preact.svg'
+import ArcGIS from './images/ArcGIS.svg'
+import autodesk from './images/autodesk.svg'
+import ubuntu from './images/ubuntu.svg'
+import windows from './images/windows.svg'
+import matlab from './images/matlab.svg'
+import office from './images/office.svg'
+import ps from './images/ps.svg'
+import ai from './images/ai.svg'
+import ae from './images/ae.svg'
+import pr from './images/pr.svg'
+import au from './images/au.svg'
+import idea from './images/idea.svg'
+import pycharm from './images/pycharm.svg'
+import jetbrains from './images/jetbrains.svg'
+import vscode from './images/vscode.svg'
+import python from './images/python.svg'
+import conda from './images/conda.svg'
+import linux from './images/linux.svg'
+import macos from './images/macos.svg'
+import shell from './images/shell.svg'
+import blender from './images/blender.svg'
+import minecraft from './images/minecraft.svg'
+import centos from './images/centos.svg'
+import debian from './images/debian.svg'
+import kali from './images/kali.svg'
+import c4d from './images/c4d.svg'
+import dsmax from './images/3dsmax.svg'
+import autocad from './images/autocad.svg'
+import Android from './images/Android.svg'
+import VMware from './images/VMware.svg'
+import {visible} from "chalk";
+
+
 
 /**
  * The frameworks and tools to display in this section.
  */
 const frameworks: Framework[] = [
   {
-    name: 'Vitest',
-    logo: logoVitest,
+    name: 'Windows',
+    logo: windows,
     color: '#fac52b',
     url: 'https://vitest.dev/',
     visible: ref(false),
   },
   {
-    name: 'React',
-    logo: logoReact,
+    name: 'Linux',
+    logo: linux,
     color: '#00d6fd',
     url: 'https://react.dev/',
     visible: ref(false),
   },
   {
-    name: 'Angular',
-    logo: logoAngular,
+    name: 'Ubuntu',
+    logo: ubuntu,
     color: '#e03237',
     url: 'https://angular.dev/',
     visible: ref(false),
   },
-  {
-    name: 'Vue',
-    logo: logoVue,
+    {
+    name: 'CentOS',
+    logo: centos,
     color: '#40b782',
     url: 'https://vuejs.org/',
     visible: ref(false),
   },
   {
-    name: 'Solid',
-    logo: logoSolid,
+    name: 'Debian',
+    logo: debian,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'kali',
+    logo: kali,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'Android',
+    logo: Android,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'VMware',
+    logo: VMware,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'MacOS',
+    logo: macos,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'Matlab',
+    logo: matlab,
+    color: '#0072a8',
+    url: 'https://redwoodjs.com/',
+    visible: ref(false),
+  },
+  {
+    name: 'ArcGIS',
+    logo: ArcGIS,
+    color: '#0072a8',
+    url: 'https://redwoodjs.com/',
+    visible: ref(false),
+  },
+  {
+    name: 'Office',
+    logo: office,
     color: '#75b2df',
     url: 'https://www.solidjs.com/',
     visible: ref(false),
   },
   {
-    name: 'Svelte',
-    logo: logoSvelte,
-    color: '#fd3e00',
-    url: 'https://svelte.dev/',
-    visible: ref(false),
-  },
-  {
-    name: 'Preact',
-    logo: logoPreact,
-    color: '#673ab8',
-    url: 'https://preactjs.com/',
-    visible: ref(false),
-  },
-  {
-    name: 'Astro',
-    logo: logoAstro,
-    color: '#FFFFFF',
-    url: 'https://astro.build',
-    visible: ref(false),
-  },
-  {
-    name: 'Remix',
-    logo: logoRemix,
-    color: '#3991fd',
-    url: 'https://remix.run/',
-    visible: ref(false),
-  },
-  {
-    name: 'Nuxt',
-    logo: logoNuxt,
-    color: '#00da81',
-    url: 'https://nuxt.com',
-    visible: ref(false),
-  },
-  {
-    name: 'Qwik',
-    logo: logoQwik,
-    color: '#18b5f4',
-    url: 'https://qwik.dev/',
-    visible: ref(false),
-  },
-  {
-    name: 'Redwood',
-    logo: logoRedwood,
-    color: '#be4622',
-    url: 'https://redwoodjs.com/',
-    visible: ref(false),
-  },
-  {
-    name: 'Analog',
-    logo: logoAnalog,
+    name: 'Photoshop',
+    logo: ps,
     color: '#c10f2e',
     url: 'https://analogjs.org/',
     visible: ref(false),
   },
   {
-    name: 'Playwright',
-    logo: logoPlaywright,
+    name: 'Premiere',
+    logo: pr,
     color: '#d45247',
     url: 'https://playwright.dev/',
     visible: ref(false),
   },
   {
-    name: 'Storybook',
-    logo: logoStorybook,
+    name: 'After Effects',
+    logo: ae,
     color: '#fd4684',
     url: 'https://storybook.js.org/',
     visible: ref(false),
   },
   {
-    name: 'Marko',
-    logo: logoMarko,
+    name: 'Illustrator',
+    logo: ai,
     color: '#de2a87',
     url: 'https://markojs.com/',
     visible: ref(false),
   },
   {
-    name: 'Laravel',
-    logo: logoLaravel,
-    color: '#eb4432',
-    url: 'https://laravel.com/',
+    name: 'Blender',
+    logo: blender,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
     visible: ref(false),
   },
   {
-    name: 'AdonisJS',
-    logo: logoAdonis,
-    color: '#5a45ff',
-    url: 'https://adonisjs.com/',
+    name: 'Cinema 4D',
+    logo: c4d,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
     visible: ref(false),
   },
   {
-    name: 'EmberJS',
-    logo: logoEmber,
-    color: '#e04e39',
-    url: 'https://emberjs.com/',
+    name: '3dsMax',
+    logo: dsmax,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
     visible: ref(false),
   },
+
+  {
+    name: 'AutoCAD',
+    logo: autocad,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'AutoCAD',
+    logo: autodesk,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'Minecraft',
+    logo: minecraft,
+    color: '#40b782',
+    url: 'https://vuejs.org/',
+    visible: ref(false),
+  },
+  {
+    name: 'Python',
+    logo: python,
+    color: '#fd3e00',
+    url: 'https://svelte.dev/',
+    visible: ref(false),
+  },
+  {
+    name: 'Conda',
+    logo: conda,
+    color: '#673ab8',
+    url: 'https://preactjs.com/',
+    visible: ref(false),
+  },
+  {
+    name: 'JetBrains',
+    logo: jetbrains,
+    color: '#FFFFFF',
+    url: 'https://astro.build',
+    visible: ref(false),
+  },
+  {
+    name: 'IDEA',
+    logo: idea,
+    color: '#3991fd',
+    url: 'https://remix.run/',
+    visible: ref(false),
+  },
+  {
+    name: 'Pycharm',
+    logo: pycharm,
+    color: '#00da81',
+    url: 'https://nuxt.com',
+    visible: ref(false),
+  },
+  {
+    name: 'VSCode',
+    logo: vscode,
+    color: '#18b5f4',
+    url: 'https://qwik.dev/',
+    visible: ref(false),
+  },
+  {
+    name: 'Terminal',
+    logo: shell,
+    color: '#be4622',
+    url: 'https://redwoodjs.com/',
+    visible: ref(false),
+  }
+
 ]
 
 // Starting parameters
