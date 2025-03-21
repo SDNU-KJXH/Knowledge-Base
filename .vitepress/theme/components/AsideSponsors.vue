@@ -24,14 +24,13 @@ const sponsors = computed(() => {
     href="https://viteconf.org/?utm=vite-sidebar"
     target="_blank"
   >
-    <img width="22" height="22" src="/viteconf.svg" alt="ViteConf Logo" />
+    <img width="22" height="22" src="/deepseek.png" alt="ViteConf Logo" />
     <span>
-      <p class="extra-info">Building Together</p>
-      <p class="heading">ViteConf 2025</p>
-      <p class="extra-info">First time in-person!</p>
+      <p class="extra-info">高速支持联网搜索</p>
+      <p class="heading">满血版DeepSeek</p>
+      <p class="extra-info">科技协会×机器人实验室</p>
     </span>
   </a>
-  <VPDocAsideSponsors v-if="data" :data="sponsors" />
 </template>
 
 <style>
