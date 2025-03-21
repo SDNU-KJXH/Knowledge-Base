@@ -8,10 +8,6 @@ package-lock.json
 yarn.lock
 .vitepress/dist
 *.local
-<<<<<<< HEAD
 .vitepress/cache
 
 .idea/*
-=======
-.vitepress/cache
->>>>>>> upstream/main

@@ -12,8 +12,6 @@
 
 ## 总体变化 {#general-changes}
 
-<<<<<<< HEAD
-=======
 ### `resolve.conditions` 的默认值 {#default-value-for-resolve-conditions}
 
 此更改不会影响未配置 [`resolve.conditions`](/config/shared-options#resolve-conditions) / [`ssr.resolve.conditions`](/config/ssr-options#ssr-resolve-conditions) / [`ssr.resolve.externalConditions`](/config/ssr-options#ssr-resolve-externalconditions) 的用户。
@@ -31,7 +29,6 @@
 如果为 `resolve.conditions` 或 `ssr.resolve.conditions` 指定了自定义值，则需要更新该值以包含新条件。
 例如，如果先前为 `resolve.conditions` 指定了 `['custom']`，那么现在就需要指定 `['custom', ...defaultClientConditions]`。
 
->>>>>>> upstream/main
 ### JSON stringify
 
 在 Vite 5 中，当设置 [`json.stringify: true`](/config/shared-options#json-stringify) 时，[`json.namedExports`](/config/shared-options#json-namedexports) 会被禁用。
@@ -40,8 +37,6 @@
 
 Vite 6 还为 `json.stringify` 引入了一个新的默认值，即 `'auto'`，它只会对大型 JSON 文件进行字符串化处理。要禁用此行为，请设置 `json.stringify: false`。
 
-<<<<<<< HEAD
-=======
 ### 在 HTML 元素中扩展对资源引用的支持 {#extended-support-of-asset-references-in-html-elements}
 
 在 Vite 5 中，只有少数支持的 HTML 元素能够引用由 Vite 处理和打包的资源，如`<link href>`、`<img src>` 等。
@@ -50,7 +45,6 @@ Vite 6 扩展了对更多 HTML 元素的支持。完整列表请参见 [HTML 功
 
 要在某些元素上选择不进行 HTML 处理，可以在元素上添加 `vite-ignore` 属性。
 
->>>>>>> upstream/main
 ### postcss-load-config
 
 [`postcss-load-config`](https://npmjs.com/package/postcss-load-config) 已从 v4 更新至 v6。现在需要 [`tsx`](https://www.npmjs.com/package/tsx) 或 [`jiti`](https://www.npmjs.com/package/jiti) 来加载 TypeScript postcss 配置文件，而非 [`ts-node`](https://www.npmjs.com/package/ts-node)。此外，现在需要 [`yaml`](https://www.npmjs.com/package/yaml) 来加​​载 YAML postcss 配置文件。
@@ -63,8 +57,6 @@ Vite 6 扩展了对更多 HTML 元素的支持。完整列表请参见 [HTML 功
 
 要迁移到现代 API，请参阅 [Sass 文档](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/)。
 
-<<<<<<< HEAD
-=======
 ### 在 library 模式下自定义 CSS 输出文件名 {#customize-css-output-file-name-in-library-mode}
 
 在 Vite 5 中，library 模式下的 CSS 输出文件名始终是 `style.css`，无法通过 Vite 配置轻松更改。
@@ -85,25 +77,10 @@ Vite 6 扩展了对更多 HTML 元素的支持。完整列表请参见 [HTML 功
 
 如果你更喜欢像在 Vite 5 中那样使用 `style.css`，可以设置 `build.lib.cssFileName: 'style'`。
 
->>>>>>> upstream/main
 ## 进阶 {#advanced}
 
 还有其他一些只影响少数用户的破坏性更改。
 
-<<<<<<< HEAD
-- [[#15637] fix!: default `build.cssMinify` to `'esbuild'` for SSR](https://github.com/vitejs/vite/pull/15637)
-  - [`build.cssMinify`](/config/build-options#build-cssminify) 现在即使是 SSR 版本也默认为启用。
-- [[#18209] refactor!: bump minimal terser version to 5.16.0](https://github.com/vitejs/vite/pull/18209)
-  - [`build.minify: 'terser'`](/config/build-options#build-minify) 所支持的最小 terser 版本从 5.4.0 提升至 5.16.0
-- [[#18231] chore(deps): update dependency @rollup/plugin-commonjs to v28](https://github.com/vitejs/vite/pull/18231)
-  - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) 现在默认为 `true`（之前为 `'auto'`)。
-- [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
-  - globs 中不再支持范围大括号 (`{01..03}` ⇒ `['01', '02', '03']`) 和递增大括号 (`{2..8..2}` ⇒ `['2', '4', '6', '8']`) 。
-
-## 从 v4 迁移 {#migration-from-v4}
-
-在 Vite v5 文档中查看 [从 v4 迁移指南](https://v4.vite.dev/guide/migration.html)（[中文版](/guide/migration-from-v4)），了解如何将你的应用迁移到 Vite v5，然后再处理本页中所提及的变化。
-=======
 - [[#17922] fix(css)!: remove default import in ssr dev](https://github.com/vitejs/vite/pull/17922)
   - 对 CSS 文件默认导入的支持在 Vite 4 中[已被弃用](https://v4.vite.dev/guide/migration.html#importing-css-as-a-string)，并在 Vite 5 中被移除，但在 SSR 开发模式中仍被无意支持。现在该支持已被移除。
 - [[#15637] fix!: default `build.cssMinify` to `'esbuild'` for SSR](https://github.com/vitejs/vite/pull/15637)
@@ -175,4 +152,3 @@ Vite 6 扩展了对更多 HTML 元素的支持。完整列表请参见 [HTML 功
 ## 从 v4 迁移 {#migration-from-v4}
 
 在 Vite v5 文档中查看 [从 v4 迁移指南](https://v5.vite.dev/guide/migration.html)（[中文版](/guide/migration-from-v4)），了解如何将你的应用迁移到 Vite v5，然后再处理本页中所提及的变化。
->>>>>>> upstream/main

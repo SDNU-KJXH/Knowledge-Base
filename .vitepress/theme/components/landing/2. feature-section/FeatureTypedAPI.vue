@@ -68,13 +68,8 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-<<<<<<< HEAD
       <div class="meta__title">啊？</div>
       <div class="meta__description">66666666</div>
-=======
-      <div class="meta__title">完全类型化的 API</div>
-      <div class="meta__description">专为在上层构建而设计</div>
->>>>>>> upstream/main
     </div>
   </div>
 </template>

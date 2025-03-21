@@ -4,10 +4,6 @@
 可以在 [环境 API 讨论](https://github.com/vitejs/vite/discussions/16358) 中向我们提供反馈
 :::
 
-<<<<<<< HEAD
-// TODO:（保持原文）
-=======
->>>>>>> upstream/main
 查看 [构建过程中的共享插件](/guide/api-environment.md#shared-plugins-during-build).
 
 影响范围：`Vite 插件作者`
@@ -18,13 +14,6 @@
 
 ## 动机 {#motivation}
 
-<<<<<<< HEAD
-// TODO: （保持原文）
-
-## 迁移指南 {#migration-guide}
-
-// TODO: （保持原文）
-=======
 调整开发和构建插件管道。
 
 ## 迁移指南 {#migration-guide}
@@ -90,4 +79,3 @@ function PerEnvironmentCountTransformedModulesPlugin() {
   }
 }
 ```
->>>>>>> upstream/main

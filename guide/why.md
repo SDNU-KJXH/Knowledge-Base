@@ -18,24 +18,15 @@ Vite 通过在一开始将应用中的模块区分为 **依赖** 和 **源码** 
 
 - **依赖** 大多为在开发时不会变动的纯 JavaScript。一些较大的依赖（例如有上百个模块的组件库）处理的代价也很高。依赖也通常会存在多种模块化格式（例如 ESM 或者 CommonJS）。
 
-<<<<<<< HEAD
-  Vite 将会使用 [esbuild](https://esbuild.github.io/) [预构建依赖](./dep-pre-bundling)。esbuild 使用 Go 编写，并且比以 JavaScript 编写的打包器预构建依赖快 10-100 倍。
-=======
   Vite 将会使用 [esbuild](https://esbuild.github.io/) [预构建依赖](./dep-pre-bundling.md)。esbuild 使用 Go 编写，并且比以 JavaScript 编写的打包器预构建依赖快 10-100 倍。
->>>>>>> upstream/main
 
 - **源码** 通常包含一些并非直接是 JavaScript 的文件，需要转换（例如 JSX，CSS 或者 Vue/Svelte 组件），时常会被编辑。同时，并不是所有的源码都需要同时被加载（例如基于路由拆分的代码模块）。
 
   Vite 以 [原生 ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 方式提供源码。这实际上是让浏览器接管了打包程序的部分工作：Vite 只需要在浏览器请求源码时进行转换并按需提供源码。根据情景动态导入代码，即只在当前屏幕上实际使用时才会被处理。
 
 <script setup>
-<<<<<<< HEAD
-import bundlerSvg from '../images/archives/bundler.svg?raw'
-import esmSvg from '../images/archives/esm.svg?raw'
-=======
 import bundlerSvg from '../images/bundler.svg?raw'
 import esmSvg from '../images/esm.svg?raw'
->>>>>>> upstream/main
 </script>
 <svg-image :svg="bundlerSvg" />
 <svg-image :svg="esmSvg" />
@@ -50,21 +41,13 @@ import esmSvg from '../images/esm.svg?raw'
 
 Vite 同时利用 HTTP 头来加速整个页面的重新加载（再次让浏览器为我们做更多事情）：源码模块的请求会根据 `304 Not Modified` 进行协商缓存，而依赖模块请求则会通过 `Cache-Control: max-age=31536000,immutable` 进行强缓存，因此一旦被缓存它们将不需要再次请求。
 
-<<<<<<< HEAD
-一旦你体验到 Vite 的神速，你是否愿意再忍受像曾经那样使用打包器开发就要打上一个大大的问号了。
-=======
 一旦你体验到 Vite 的神速，你可能再也不想回到曾经的打包开发方式了。
->>>>>>> upstream/main
 
 ## 为什么生产环境仍需打包 {#why-bundle-for-production}
 
 尽管原生 ESM 现在得到了广泛支持，但由于嵌套导入会导致额外的网络往返，在生产环境中发布未打包的 ESM 仍然效率低下（即使使用 HTTP/2）。为了在生产环境中获得最佳的加载性能，最好还是将代码进行 tree-shaking、懒加载和 chunk 分割（以获得更好的缓存）。
 
-<<<<<<< HEAD
-要确保开发服务器和生产环境构建之间的最优输出和行为一致并不容易。所以 Vite 附带了一套 [构建优化](./features#build-optimizations) 的 [构建命令](./build)，开箱即用。
-=======
 要确保开发服务器和生产环境构建之间的最优输出和行为一致并不容易。所以 Vite 附带了一套 [构建优化](./features.md#build-optimizations) 的 [构建命令](./build.md)，开箱即用。
->>>>>>> upstream/main
 
 ### 为何不用 ESBuild 打包？ {#why-not-bundle-with-esbuild}
 
@@ -74,17 +57,6 @@ Vite 目前的插件 API 与使用 `esbuild` 作为打包器并不兼容。尽�
 
 Rollup 已经开始着手改进性能，[在 v4 中将其解析器切换到 SWC](https://github.com/rollup/rollup/pull/5073)。同时还有一个正在进行中的工作，即构建一个名为 Rolldown 的 Rust 版本的 Rollup。一旦 Rolldown 准备就绪，它就可以在 Vite 中取代 Rollup 和 esbuild，显著提高构建性能，并消除开发和构建之间的不一致性。你可以观看 [Evan You 在 ViteConf 2023 的主题演讲](https://youtu.be/hrdwQHoAp0M) 了解更多细节。
 
-<<<<<<< HEAD
-## Vite 与 X 的区别是？ {#how-is-vite-different-from-x}
-
-你可以查看 [比较](./comparisons) 章节获取更多细节，了解 Vite 与同类工具的异同。
-
-<small class="cn-footnote">
-<br/>
-<strong class="title">译者注</strong>
-<a id="footnote-1"></a>[1] 暂以意译方式呈现。
-</small>
-=======
 ## Vite 与其他免打包构建工具的关系是什么？{##how-vite-relates-to-other-unbundled-build-tools}
 
 Preact 团队的 [WMR](https://github.com/preactjs/wmr) 旨在提供类似的功能集。Vite 用于开发和构建的通用 Rollup 插件 API 就是受其启发。WMR 已经不再维护。Preact 团队现在推荐使用 Vite 和 [@preactjs/preset-vite](https://github.com/preactjs/preset-vite)。
@@ -92,4 +64,3 @@ Preact 团队的 [WMR](https://github.com/preactjs/wmr) 旨在提供类似的功
 [Snowpack](https://www.snowpack.dev/) 也是一个免打包的原生 ESM 开发服务器，与 Vite 的职责非常相似。Vite 的依赖预打包也受到了 Snowpack v1（现在是 [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)）的启发。Snowpack 已经不再维护。Snowpack 团队现在正在研究由 Vite 驱动的静态网站构建器 [Astro](https://astro.build/)。
 
 [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/)（以前是 `es-dev-server`）是一个伟大的项目，Vite 1.0 的基于 Koa 的服务器设置就是受其启发。`@web` 这个项目正在积极维护，并包含许多其他优秀的工具，这些工具也可能对 Vite 用户有所帮助。
->>>>>>> upstream/main

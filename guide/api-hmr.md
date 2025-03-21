@@ -10,14 +10,10 @@ Vite 通过特殊的 `import.meta.hot` 对象暴露手动 HMR API。
 
 ```ts twoslash
 import type { ModuleNamespace } from 'vite/types/hot.d.ts'
-<<<<<<< HEAD
-import type { InferCustomEventPayload } from 'vite/types/customEvent.d.ts'
-=======
 import type {
   CustomEventName,
   InferCustomEventPayload,
 } from 'vite/types/customEvent.d.ts'
->>>>>>> upstream/main
 
 // ---cut---
 interface ImportMeta {
@@ -39,17 +35,6 @@ interface ViteHotContext {
   prune(cb: (data: any) => void): void
   invalidate(message?: string): void
 
-<<<<<<< HEAD
-  on<T extends string>(
-    event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void,
-  ): void
-  off<T extends string>(
-    event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void,
-  ): void
-  send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
-=======
   on<T extends CustomEventName>(
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
@@ -62,7 +47,6 @@ interface ViteHotContext {
     event: T,
     data?: InferCustomEventPayload<T>,
   ): void
->>>>>>> upstream/main
 }
 ```
 

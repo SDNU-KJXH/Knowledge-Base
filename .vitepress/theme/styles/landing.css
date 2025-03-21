@@ -3,16 +3,10 @@
 /* /////////////////////// */
 
 html:has(.landing) {
-<<<<<<< HEAD
-  background-color: #101010;
-  --vp-c-bg: #101010;
-
-=======
   --vp-c-bg: #101010;
 
   background-color: #101010;
 
->>>>>>> upstream/main
   body {
     background-color: #101010;
   }
@@ -44,11 +38,6 @@ html:has(.landing) {
 
     .content-body {
       background: none !important;
-<<<<<<< HEAD
-    }
-  }
-
-=======
       transition: none;
     }
   }
@@ -57,7 +46,6 @@ html:has(.landing) {
     transition: none;
   }
 
->>>>>>> upstream/main
   .VPFooter {
     border-top: 1px solid #262626 !important;
     background: radial-gradient(circle at top center, #0f151a 30%, #000000 80%);
@@ -76,13 +64,10 @@ html:has(.landing) {
     display: none;
   }
 
-<<<<<<< HEAD
-=======
   .VPMenu .translations + .group {
     display: none;
   }
 
->>>>>>> upstream/main
   .VPNavScreenAppearance {
     visibility: hidden;
   }
@@ -191,12 +176,8 @@ html:has(.landing) {
 
     &.btn--primary {
       position: relative;
-<<<<<<< HEAD
-      background: radial-gradient(
-=======
       background:
         radial-gradient(
->>>>>>> upstream/main
           141.42% 141.42% at 100% 0%,
           rgba(255, 255, 255, 0.4) 0%,
           rgba(255, 255, 255, 0) 100%
@@ -214,12 +195,8 @@ html:has(.landing) {
       box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.75) inset;
 
       &:hover {
-<<<<<<< HEAD
-        background: radial-gradient(
-=======
         background:
           radial-gradient(
->>>>>>> upstream/main
             141.42% 141.42% at 100% 0%,
             rgba(255, 255, 255, 0.5) 0%,
             rgba(255, 255, 255, 0) 100%

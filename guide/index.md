@@ -22,11 +22,7 @@ Vite 还提供了强大的扩展性，可通过其 [插件 API](./api-plugin) �
 
 在开发阶段，Vite 将 [`esnext` 作为转换目标](https://esbuild.github.io/api/#target)，因为我们假设使用的是现代浏览器，它支持所有最新的 JavaScript 和 CSS 特性。这样可以防止语法降级，让 Vite 尽可能地接近原始源代码。
 
-<<<<<<< HEAD
-对于生产构建，默认情况下 Vite 的目标浏览器支持 [原生 ES 模块](https://caniuse.com/es6-module)、[原生 ESM 动态导入](https://caniuse.com/es6-module-dynamic-import) 和 [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)。旧版浏览器可以通过官方的 [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)。查看 [构建生产环境](./build) 了解更多细节。
-=======
 对于生产构建，默认情况下 Vite 的目标浏览器支持 [原生 ES 模块](https://caniuse.com/es6-module)、[原生 ESM 动态导入](https://caniuse.com/es6-module-dynamic-import)、[`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)、[nullish coalescing](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) 和 [BigInt](https://caniuse.com/bigint)。旧版浏览器可以通过官方的 [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)。查看 [构建生产环境](./build) 了解更多细节。
->>>>>>> upstream/main
 
 ## 在线试用 Vite {#trying-vite-online}
 
@@ -96,11 +92,7 @@ $ bun create vite my-vue-app --template vue
 
 :::
 
-<<<<<<< HEAD
-查看 [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) 以获取每个模板的更多细节：`vanilla`，`vanilla-ts`, `vue`, `vue-ts`，`react`，`react-ts`，`react-swc`，`react-swc-ts`，`preact`，`preact-ts`，`lit`，`lit-ts`，`svelte`，`svelte-ts`，`solid`，`solid-ts`，`qwik`，`qwik-ts`。
-=======
 查看 [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) 以获取每个模板的更多细节：`vanilla`，`vanilla-ts`，`vue`，`vue-ts`，`react`，`react-ts`，`react-swc`，`react-swc-ts`，`preact`，`preact-ts`，`lit`，`lit-ts`，`svelte`，`svelte-ts`，`solid`，`solid-ts`，`qwik`，`qwik-ts`。
->>>>>>> upstream/main
 
 你可以使用 `.` 作为项目名称，在当前目录中创建项目脚手架。
 
@@ -189,11 +181,7 @@ Vite 也支持多个 `.html` 作入口点的 [多页面应用模式](./build#mul
 执行 `vite` 命令会以当前工作目录作为根目录启动开发服务器。你也可以通过 `vite serve some/sub/dir` 来指定一个不同的根目录。
 需要注意的是，Vite 也会在项目的根目录中寻找 [它的配置文件（即 `vite.config.js`）](/config/#configuring-vite)，所以如果更改了根目录，你需要将配置文件一起移动过去。
 
-<<<<<<< HEAD
-## 命令行界面 {#command-line-interface}
-=======
 ## 命令行接口 {#command-line-interface}
->>>>>>> upstream/main
 
 在安装了 Vite 的项目中，可以在 npm scripts 中使用 `vite` 可执行文件，或者直接使用 `npx vite` 运行它。下面是通过脚手架创建的 Vite 项目中默认的 npm scripts：
 
@@ -210,13 +198,6 @@ Vite 也支持多个 `.html` 作入口点的 [多页面应用模式](./build#mul
 
 可以指定额外的命令行选项，如 `--port` 或 `--open`。运行 `npx vite --help` 获得完整的命令行选项列表。
 
-<<<<<<< HEAD
-查看 [命令行界面](./cli.md) 了解更多细节。
-
-## 使用未发布的功能 {#using-unreleased-commits}
-
-如果你迫不及待想要体验最新的功能，可以自行克隆 [vite 仓库](https://github.com/vitejs/vite) 到本地机器上然后自行将其链接（将需要 [pnpm](https://pnpm.io/)）：
-=======
 查看 [命令行接口](./cli.md) 了解更多细节。
 
 ## 使用未发布的功能 {#using-unreleased-commits}
@@ -246,7 +227,6 @@ $ bun add -D https://pkg.pr.new/vite@SHA
 将 `SHA` 替换为 [Vite 的提交 SHA](https://github.com/vitejs/vite/commits/main/)。请注意，仅最近一个月的提交有效，旧版本提交的构建产物会被清除。
 
 或者，你可以克隆 [Vite 代码仓库](https://github.com/vitejs/vite) 到本地，自行构建并建立软链接（需安装 [pnpm](https://pnpm.io/)）：
->>>>>>> upstream/main
 
 ```bash
 git clone https://github.com/vitejs/vite.git
@@ -259,13 +239,10 @@ pnpm link --global # 在这一步中可使用你喜欢的包管理器
 
 然后，回到你的 Vite 项目并运行 `pnpm link --global vite`（或者使用你的其他包管理工具来全局链接 `vite`）。重新启动开发服务器来体验新功能吧！
 
-<<<<<<< HEAD
-=======
 ::: tip 处理依赖中的 Vite 版本
 若需替换依赖链中传递使用的 Vite 版本（Transitive Dependencies），应使用 [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) 或 [pnpm overrides](https://pnpm.io/package_json#pnpmoverrides)。
 :::
 
->>>>>>> upstream/main
 ## 社区 {#community}
 
 如果你有疑问或者需要帮助，可以到 [Discord](https://chat.vite.dev) 和 [GitHub Discussions](https://github.com/vitejs/vite/discussions) 社区来寻求帮助。

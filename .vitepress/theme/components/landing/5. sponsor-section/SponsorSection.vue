@@ -1,9 +1,5 @@
 <script setup>
-<<<<<<< HEAD
 import { useSponsor } from '../../../composables/sponsor'
-=======
-import { useSponsor, voidZero } from '../../../composables/sponsor'
->>>>>>> upstream/main
 import { VPSponsors } from 'vitepress/theme'
 
 const { data } = useSponsor()
@@ -50,7 +46,6 @@ const { data } = useSponsor()
       width="58"
       height="55"
     />
-<<<<<<< HEAD
     <h2>用爱发电</h2>
     <h4>
       哼哼哼啊啊啊啊啊啊啊啊
@@ -60,17 +55,6 @@ const { data } = useSponsor()
     <div class="voidzero">
       <a href="https://voidzero.dev" target="_blank">
         <img src="./voidzero.svg" />
-=======
-    <h2>免费 &amp; 开源</h2>
-    <h4>
-      Vite 基于 MIT 许可发布，并将始终保持免费和开源。这一切都要感谢我们的贡献者和以下公司：
-    </h4>
-
-    <h4>由以下团队呈现</h4>
-    <div class="voidzero">
-      <a :href="voidZero.url" target="_blank">
-        <img :src="voidZero.img" />
->>>>>>> upstream/main
       </a>
     </div>
 
@@ -85,11 +69,7 @@ const { data } = useSponsor()
         href="https://github.com/sponsors/vitejs"
         target="_blank"
         class="btn btn--outline btn--rounded"
-<<<<<<< HEAD
         >给我们打钱</a
-=======
-        >成为赞助商</a
->>>>>>> upstream/main
       >
     </div>
   </div>
@@ -140,10 +120,6 @@ const { data } = useSponsor()
       position: relative;
       display: inline-block;
       max-width: 260px;
-<<<<<<< HEAD
-=======
-      filter: grayscale(1) invert(1);
->>>>>>> upstream/main
     }
   }
 
@@ -156,11 +132,7 @@ const { data } = useSponsor()
     font-weight: 400;
     line-height: 150%; /* 24px */
     letter-spacing: -0.32px;
-<<<<<<< HEAD
     width: 520px;
-=======
-    width: 480px;
->>>>>>> upstream/main
     max-width: 100%;
     margin: 0 auto 40px;
     padding: 0 20px;

@@ -25,15 +25,12 @@ const data = ref()
 const dataHost = 'https://sponsors.vuejs.org'
 const dataUrl = `${dataHost}/vite.json`
 
-<<<<<<< HEAD
-=======
 export const voidZero = {
   name: 'VoidZero',
   url: 'https://voidzero.dev',
   img: '/voidzero.svg',
 } satisfies Sponsor
 
->>>>>>> upstream/main
 const viteSponsors: Pick<Sponsors, 'special' | 'gold'> = {
   special: [
     // sponsors patak-dev
@@ -48,15 +45,6 @@ const viteSponsors: Pick<Sponsors, 'special' | 'gold'> = {
       url: 'https://nuxtlabs.com',
       img: '/nuxtlabs.svg',
     },
-<<<<<<< HEAD
-    // sponsors bluwy
-    {
-      name: 'Astro',
-      url: 'https://astro.build',
-      img: '/astro.svg',
-    },
-=======
->>>>>>> upstream/main
   ],
   gold: [
     // now automated via sponsors.vuejs.org too
@@ -111,29 +99,17 @@ export function useSponsor() {
 function mapSponsors(sponsors: Sponsors) {
   return [
     {
-<<<<<<< HEAD
-      tier: 'in partnership with',
-=======
       tier: '合作伙伴',
->>>>>>> upstream/main
       size: 'big',
       items: viteSponsors['special'],
     },
     {
-<<<<<<< HEAD
-      tier: 'Platinum Sponsors',
-=======
       tier: '铂金赞助商',
->>>>>>> upstream/main
       size: 'big',
       items: mapImgPath(sponsors['platinum']),
     },
     {
-<<<<<<< HEAD
-      tier: 'Gold Sponsors',
-=======
       tier: '黄金赞助商',
->>>>>>> upstream/main
       size: 'medium',
       items: [...mapImgPath(sponsors['gold']), ...viteSponsors['gold']],
     },

@@ -117,10 +117,7 @@ declare const __APP_VERSION__: string
 ## resolve.conditions {#resolve-conditions}
 
 - **类型：** `string[]`
-<<<<<<< HEAD
-=======
 - **默认：** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
->>>>>>> upstream/main
 
 解决程序包中 [情景导出](https://nodejs.org/api/packages.html#packages_conditional_exports) 时的其他允许条件。
 
@@ -139,13 +136,9 @@ declare const __APP_VERSION__: string
 
 在这里，`import` 和 `require` 被称为“情景”。情景可以嵌套，并且应该从最特定的到最不特定的指定。
 
-<<<<<<< HEAD
-Vite 有一个“允许的情景”列表，并且会匹配列表中第一个情景。默认允许的情景是：`import`，`module`，`browser`，`default` 和基于当前情景为 `production/development`。`resolve.conditions` 配置项使得我们可以指定其他允许的情景。
-=======
 `development|production` 是一个特殊值，根据 `process.env.NODE_ENV` 的值替换为 `production` 或  `development` 。如果 `process.env.NODE_ENV === 'production'`，则替换为 `production`，否则替换为 `development`。
 
 请注意，如果符合要求，`import`，`require`，`default` 始终会被应用。
->>>>>>> upstream/main
 
 :::warning 解决子路径导出问题
 导出以“/”结尾的 key 已被 Node 弃用，可能无法正常工作。请联系包的作者改为使用 [`*` 子路径模式](https://nodejs.org/api/packages.html#package-entry-points)。
@@ -154,11 +147,7 @@ Vite 有一个“允许的情景”列表，并且会匹配列表中第一个情
 ## resolve.mainFields {#resolve-mainfields}
 
 - **类型：** `string[]`
-<<<<<<< HEAD
-- **默认：** `['browser', 'module', 'jsnext:main', 'jsnext']`
-=======
 - **默认：** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
->>>>>>> upstream/main
 
 `package.json` 中，在解析包的入口点时尝试的字段列表。注意：这比从 `exports` 字段解析的情景导出优先级低：如果一个入口起点从 `exports` 成功解析，`resolve.mainFields` 将被忽略。
 
@@ -229,11 +218,7 @@ Vite 有一个“允许的情景”列表，并且会匹配列表中第一个情
 
 内联的 PostCSS 配置（格式同 `postcss.config.js`），或者一个（默认基于项目根目录的）自定义的 PostCSS 配置路径。
 
-<<<<<<< HEAD
-对内联的 POSTCSS 配置，它期望接收与 `postcss.config.js` 一致的格式。但对于 `plugins` 属性有些特别，只接收使用 [数组格式](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)。
-=======
 对内联的 PostCSS 配置，它期望接收与 `postcss.config.js` 一致的格式。但对于 `plugins` 属性有些特别，只接收使用 [数组格式](https://github.com/postcss/postcss-load-config/blob/main/README.md#array)。
->>>>>>> upstream/main
 
 搜索是使用 [postcss-load-config](https://github.com/postcss/postcss-load-config) 完成的，只有被支持的文件名才会被加载。默认情况下，不会搜索工作区根目录（或 [项目根目录](/guide/#index-html-and-project-root)，如果未找到工作区）之外的配置文件。如有必要，您可以指定根目录之外的自定义路径来加载特定的配置文件。
 

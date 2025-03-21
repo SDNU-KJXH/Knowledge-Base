@@ -349,15 +349,9 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta">
-<<<<<<< HEAD
       <div class="meta__title">写点什么</div>
       <div class="meta__description">
         写点什么好呢
-=======
-      <div class="meta__title">灵活的插件系统</div>
-      <div class="meta__description">
-        Vite 插件扩展了 Rollup 精妙的插件接口，并增加了一些 Vite 特有的选项配置
->>>>>>> upstream/main
       </div>
     </div>
   </div>

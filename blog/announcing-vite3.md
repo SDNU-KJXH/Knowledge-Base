@@ -47,11 +47,7 @@ If you are new to Vite, we recommend reading the [Why Vite Guide](https://vite.d
 
 Go to [vite.dev](https://vite.dev) to enjoy the new v3 docs. Vite is now using the new [VitePress](https://vitepress.vuejs.org) default theme, with a stunning dark mode between other features.
 
-<<<<<<< HEAD
-[![Vite documentation frontpage](../images/archives/v3-docs.png)](https://vite.dev)
-=======
 [![Vite documentation frontpage](../images/v3-docs.png)](https://vite.dev)
->>>>>>> upstream/main
 
 Several projects in the ecosystem have already migrated to it (see [Vitest](https://vitest.dev), [vite-plugin-pwa](https://vite-plugin-pwa.netlify.app/), and [VitePress](https://vitepress.vuejs.org/) itself).
 
@@ -68,21 +64,12 @@ There is also now an official Spanish translation, that has been added to the pr
 [create-vite](/guide/#trying-vite-online) templates have been a great tool to quickly test Vite with your favorite framework. In Vite 3, all of the templates got a new theme in line with the new docs. Open them online and start playing with Vite 3 now:
 
 <div class="stackblitz-links">
-<<<<<<< HEAD
-<a target="_blank" href="https://vite.new"><img width="75" height="75" src="../images/archives/vite.svg" alt="Vite logo"></a>
-<a target="_blank" href="https://vite.new/vue"><img width="75" height="75" src="../images/archives/vue.svg" alt="Vue logo"></a>
-<a target="_blank" href="https://vite.new/svelte"><img width="60" height="60" src="../images/archives/svelte.svg" alt="Svelte logo"></a>
-<a target="_blank" href="https://vite.new/react"><img width="75" height="75" src="../images/archives/react.svg" alt="React logo"></a>
-<a target="_blank" href="https://vite.new/preact"><img width="65" height="65" src="../images/archives/preact.svg" alt="Preact logo"></a>
-<a target="_blank" href="https://vite.new/lit"><img width="60" height="60" src="../images/archives/lit.svg" alt="Lit logo"></a>
-=======
 <a target="_blank" href="https://vite.new"><img width="75" height="75" src="../images/vite.svg" alt="Vite logo"></a>
 <a target="_blank" href="https://vite.new/vue"><img width="75" height="75" src="../images/vue.svg" alt="Vue logo"></a>
 <a target="_blank" href="https://vite.new/svelte"><img width="60" height="60" src="../images/svelte.svg" alt="Svelte logo"></a>
 <a target="_blank" href="https://vite.new/react"><img width="75" height="75" src="../images/react.svg" alt="React logo"></a>
 <a target="_blank" href="https://vite.new/preact"><img width="65" height="65" src="../images/preact.svg" alt="Preact logo"></a>
 <a target="_blank" href="https://vite.new/lit"><img width="60" height="60" src="../images/lit.svg" alt="Lit logo"></a>
->>>>>>> upstream/main
 </div>
 
 <style>
@@ -144,11 +131,7 @@ In Vite 2.9, both the scanner and optimizer were run in the background. In the b
 
 </details>
 
-<<<<<<< HEAD
-<img style="background-color: var(--vp-code-block-bg);padding:4%;border-radius:8px;" width="100%" height="auto" src="../images/archives/vite-3-cold-start.svg" alt="Two graphs comparing Vite 2.9 and Vite 3 optimization strategy">
-=======
 <img style="background-color: var(--vp-code-block-bg);padding:4%;border-radius:8px;" width="100%" height="auto" src="../images/vite-3-cold-start.svg" alt="Two graphs comparing Vite 2.9 and Vite 3 optimization strategy">
->>>>>>> upstream/main
 
 ### import.meta.glob
 
@@ -240,15 +223,9 @@ In part, this reduction was possible by making some dependencies that most users
 
 A triaging marathon was spearheaded by [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), that recently joined the Vite team. During the past three months, the Vite open issues were reduced from 770 to 400. And this dive was achieved while the newly open PRs were at an all-time high. At the same time, [@haoqunjiang](https://twitter.com/haoqunjiang) had also curated a comprehensive [overview of Vite issues](https://github.com/vitejs/vite/discussions/8232).
 
-<<<<<<< HEAD
-[![Graph of open issues and pull requests in Vite](../images/archives/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
-
-[![Graph of new issues and pull requests in Vite](../images/archives/v3-new-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
-=======
 [![Graph of open issues and pull requests in Vite](../images/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
 
 [![Graph of new issues and pull requests in Vite](../images/v3-new-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
->>>>>>> upstream/main
 
 ## Compatibility Notes
 

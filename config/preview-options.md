@@ -19,8 +19,6 @@
 
 :::
 
-<<<<<<< HEAD
-=======
 ## preview.allowedHosts
 
 - **类型：** `string | true`
@@ -30,7 +28,6 @@ Vite 允许响应的主机名。
 
 查看 [`server.allowedHosts`](./server-options#server-allowedhosts) 以获取更多详细信息。
 
->>>>>>> upstream/main
 ## preview.port {#preview-port}
 
 - **类型：** `number`
@@ -63,15 +60,9 @@ export default defineConfig({
 - **类型：** `https.ServerOptions`
 - **默认：** [`server.https`](./server-options#server-https)
 
-<<<<<<< HEAD
-启用 TLS + HTTP/2。注意，只有在与 [`server.proxy` 选项](./server-options#server-proxy) 同时使用时，才会降级为 TLS。
-
-该值也可以传递给 `https.createServer()` 的 [options 对象](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)。
-=======
 启用 TLS + HTTP/2。
 
 有关更多详细信息，请参阅 [`server.https`](./server-options#server-https)。
->>>>>>> upstream/main
 
 ## preview.open {#preview-open}
 
@@ -96,13 +87,9 @@ export default defineConfig({
 - **类型：** `boolean | CorsOptions`
 - **默认：** [`server.cors`](./server-options#server-cors)
 
-<<<<<<< HEAD
-为开发服务器配置 CORS。此功能默认启用并支持任何来源。可传递一个 [options 对象](https://github.com/expressjs/cors#configuration-options) 来进行配置，或者传递 `false` 来禁用此行为。
-=======
 为预览服务器配置 CORS。
 
 请查看 [`server.cors`](./server-options#server-cors) 了解更多细节。
->>>>>>> upstream/main
 
 ## preview.headers {#preview-headers}
 

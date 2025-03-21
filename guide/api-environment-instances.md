@@ -1,22 +1,14 @@
 # 使用 `Environment` 实例 {#using-environment-instances}
 
 :::warning 实验性
-<<<<<<< HEAD
-这个 API 的初始版本在 Vite 5.1 中以 "Vite Runtime API" 的名字被引入。这份指南介绍了经过修订后的 API，被重新命名为环境 API（Environment API）。这个 API 将在 Vite 6 中作为实验性功能发布。你现在已经可以在最新的 `vite@6.0.0-beta.x` 版本中进行测试。
-=======
 环境 API 是实验性的。在 Vite 6 期间，我们将保持这些 API 的稳定，以便生态系统可以在其基础上进行实验和构建。我们计划在 Vite 7 中稳定这些新 API，并可能进行一些重大更改。
->>>>>>> upstream/main
 
 资料：
 
 - [反馈讨论](https://github.com/vitejs/vite/discussions/16358) 我们在此处收集新 API 的反馈。
 - [环境 API PR](https://github.com/vitejs/vite/pull/16471) 新 API 在此处被实现并进行了审查。
 
-<<<<<<< HEAD
-在参与测试这个提议的过程中，请与我们分享您的反馈。
-=======
 请与我们分享您的反馈。
->>>>>>> upstream/main
 :::
 
 ## 访问环境 {#accessing-the-environments}
@@ -48,11 +40,7 @@ class DevEnvironment {
    * 用于在目标运行时的关联模块运行器中
    * 发送和接收消息的通信通道。
    */
-<<<<<<< HEAD
-  hot: HotChannel | null
-=======
   hot: NormalizedHotChannel
->>>>>>> upstream/main
   /**
    * 模块节点的图，包含处理过的模块之间的
    * 导入关系和处理代码的缓存结果。
@@ -75,25 +63,17 @@ class DevEnvironment {
    */
   config: ResolvedConfig & ResolvedDevEnvironmentOptions
 
-<<<<<<< HEAD
-  constructor(name, config, { hot, options }: DevEnvironmentSetup)
-=======
   constructor(
     name: string,
     config: ResolvedConfig,
     context: DevEnvironmentContext,
   )
->>>>>>> upstream/main
 
   /**
    * 解析 URL 到一个 id，加载它，并使用插件管道
    * 处理代码。模块图也会被更新。
    */
-<<<<<<< HEAD
-  async transformRequest(url: string): TransformResult
-=======
   async transformRequest(url: string): Promise<TransformResult | null>
->>>>>>> upstream/main
 
   /**
    * 注册一个低优先级处理的请求。这对于避免瀑布效应
@@ -101,13 +81,6 @@ class DevEnvironment {
    * 信息，因此它可以预热模块图，使得当模块被请求时
    * 已经处理完毕。
    */
-<<<<<<< HEAD
-  async warmupRequest(url: string): void
-}
-```
-
-其中 `TransformResult` 是：
-=======
   async warmupRequest(url: string): Promise<void>
 }
 ```
@@ -127,7 +100,6 @@ interface DevEnvironmentContext {
 ```
 
 `TransformResult` 是：
->>>>>>> upstream/main
 
 ```ts
 interface TransformResult {
@@ -201,20 +173,14 @@ export class EnvironmentModuleGraph {
     rawUrl: string,
   ): Promise<EnvironmentModuleNode | undefined>
 
-<<<<<<< HEAD
-=======
   getModuleById(id: string): EnvironmentModuleNode | undefined
 
->>>>>>> upstream/main
   getModulesByFile(file: string): Set<EnvironmentModuleNode> | undefined
 
   onFileChange(file: string): void
 
-<<<<<<< HEAD
-=======
   onFileDelete(file: string): void
 
->>>>>>> upstream/main
   invalidateModule(
     mod: EnvironmentModuleNode,
     seen: Set<EnvironmentModuleNode> = new Set(),

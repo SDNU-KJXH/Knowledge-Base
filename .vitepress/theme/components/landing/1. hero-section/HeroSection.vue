@@ -5,20 +5,13 @@ import HeroDiagram from './HeroDiagram.vue'
 <template>
   <div class="hero">
     <div class="container">
-<<<<<<< HEAD
       <!-- ViteConf Replay Button -->
       <a
         href="https://ed.qcea.top"
-=======
-      <!-- ViteConf 2025 Button -->
-      <a
-        href="https://viteconf.org/?utm=vite"
->>>>>>> upstream/main
         class="hero__pill"
         target="_blank"
       >
         <img src="/viteconf.svg" alt="Viteconf logo" width="20" height="20" />
-<<<<<<< HEAD
         <span>点击使用免费的满血版DeepSeek R1</span>
       </a>
 
@@ -27,39 +20,20 @@ import HeroDiagram from './HeroDiagram.vue'
       <!-- Tagline -->
       <h3>
         山东师范大学科技协会官方网站与知识库
-=======
-        <span>ViteConf 2025</span>
-      </a>
-
-      <!-- Heading -->
-      <h1>卓越的 Web 开发<br />构建工具</h1>
-      <!-- Tagline -->
-      <h3>
-        Vite 是一个超快的前端构建工具 <br> 赋能下一代 Web 应用的发展
->>>>>>> upstream/main
       </h3>
 
       <!-- CTA Buttons -->
       <div class="hero__actions">
-<<<<<<< HEAD
         <a href="/guide/" class="btn btn--primary">电脑知识</a>
         <a href="https://ed.qcea.top" class="btn btn--primary">购买指南</a>
         <a href="https://ed.qcea.top" class="btn btn--primary">软件推荐</a>
         <a href="https://ed.qcea.top" class="btn btn--primary">活动专栏</a>
-=======
-        <a href="/guide/" class="btn btn--primary">开始</a>
->>>>>>> upstream/main
         <a
           href="https://github.com/vitejs/vite"
           target="_blank"
           class="btn btn--outline"
         >
-<<<<<<< HEAD
           关于我们
-=======
-          <img src="/github.svg" alt="GitHub logo" width="20" height="20" />
-          GitHub
->>>>>>> upstream/main
         </a>
       </div>
     </div>

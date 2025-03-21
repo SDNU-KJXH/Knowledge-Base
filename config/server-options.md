@@ -42,9 +42,6 @@ export default defineConfig({
 
 :::
 
-<<<<<<< HEAD
-## server.port {#server-port}
-=======
 ## server.allowedHosts
 
 - **类型：** `string[] | true`
@@ -77,7 +74,6 @@ Vite允许响应的主机名。
 :::
 
 ## server.port
->>>>>>> upstream/main
 
 - **类型：** `number`
 - **默认值：** `5173`
@@ -94,15 +90,9 @@ Vite允许响应的主机名。
 
 - **类型：** `https.ServerOptions`
 
-<<<<<<< HEAD
-启用 TLS + HTTP/2。注意：当 [`server.proxy` 选项](#server-proxy) 也被使用时，将会仅使用 TLS。
-
-这个值也可以是一个传递给 `https.createServer()` 的 [选项对象](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)。
-=======
 启用 TLS + HTTP/2。该值是传递给 `https.createServer()` 的 [options 对象](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)。
 
 请注意，仅当同时使用 [`server.proxy` 选项](#server-proxy) 时，才会降级为 TLS。
->>>>>>> upstream/main
 
 需要一个合法可用的证书。对基本使用的配置需求来说，你可以添加 [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) 到项目插件中，它会自动创建和缓存一个自签名的证书。但我们推荐你创建和使用你自己的证书。
 
@@ -142,11 +132,6 @@ export default defineConfig({
 export default defineConfig({
   server: {
     proxy: {
-<<<<<<< HEAD
-      // 字符串简写写法：http://localhost:5173/foo -> http://localhost:4567/foo
-      '/foo': 'http://localhost:4567',
-      // 带选项写法：http://localhost:5173/api/bar -> http://jsonplaceholder.typicode.com/bar
-=======
       // 字符串简写写法：
       // http://localhost:5173/foo 
       // -> http://localhost:4567/foo
@@ -154,19 +139,14 @@ export default defineConfig({
       // 带选项写法：
       // http://localhost:5173/api/bar 
       // -> http://jsonplaceholder.typicode.com/bar
->>>>>>> upstream/main
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-<<<<<<< HEAD
-      // 正则表达式写法：http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
-=======
       // 正则表达式写法：
       // http://localhost:5173/fallback/ 
       // -> http://jsonplaceholder.typicode.com/
->>>>>>> upstream/main
       '^/fallback/.*': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
@@ -180,16 +160,11 @@ export default defineConfig({
           // proxy 是 'http-proxy' 的实例
         }
       },
-<<<<<<< HEAD
-      // 代理 websockets 或 socket.io 写法：ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
-      // 在使用 `rewriteWsOrigin` 时要特别谨慎，因为这可能会让代理服务器暴露在 CSRF 攻击之下
-=======
       // 代理 websockets 或 socket.io 写法：
       // ws://localhost:5173/socket.io 
       // -> ws://localhost:5174/socket.io
       // 在使用 `rewriteWsOrigin` 时要特别谨慎，因为这可能会让
       // 代理服务器暴露在 CSRF 攻击之下
->>>>>>> upstream/main
       '/socket.io': {
         target: 'ws://localhost:5174',
         ws: true,
@@ -203,10 +178,6 @@ export default defineConfig({
 ## server.cors {#server-cors}
 
 - **类型：** `boolean | CorsOptions`
-<<<<<<< HEAD
-
-为开发服务器配置 CORS。默认启用并允许任何源，传递一个 [选项对象](https://github.com/expressjs/cors#configuration-options) 来调整行为或设为 `false` 表示禁用。
-=======
 - **默认：** `{ origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }` （允许 localhost、`127.0.0.1` 和 `::1`）
 
 为开发服务器配置 CORS。传递一个 [选项对象](https://github.com/expressjs/cors#configuration-options) 来调整行为，或设置为 `true` 来允许任何源。
@@ -216,7 +187,6 @@ export default defineConfig({
 将 `server.cors` 设置为 `true` 允许任何网站向你的开发服务器发送请求并下载你的源代码和内容。我们建议始终使用显式的允许来源列表。
 
 :::
->>>>>>> upstream/main
 
 ## server.headers {#server-headers}
 
@@ -282,19 +252,11 @@ export default defineConfig({
 
 - **类型：** `object | null`
 
-<<<<<<< HEAD
-传递给 [chokidar](https://github.com/paulmillr/chokidar#getting-started) 的文件系统监听器选项。如果传递了 `ignored` 选项，Vite 还会自动将任何字符串转换为 [picomatch 模式](https://github.com/micromatch/picomatch#globbing-features)。
-
-Vite 服务器的文件监听器默认会监听 `root` 目录，同时会跳过 `.git/`、`node_modules/`，以及 Vite 的 `cacheDir` 和 `build.outDir` 这些目录。当监听到文件更新时，Vite 会应用 HMR 并且只在需要时更新页面。
-
-如果设置为 `null`，`server.watcher` 将不会监听任何文件，并且调用 `add` 将不起作用。
-=======
 文件系统监视器选项传递给 [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api)。
 
 Vite 服务器的文件监听器默认会监听 `root` 目录，同时会跳过 `.git/`、`node_modules/`，以及 Vite 的 `cacheDir` 和 `build.outDir` 这些目录。当监听到文件更新时，Vite 会应用 HMR 并且只在需要时更新页面。
 
 如果设置为 `null`，则不会监视任何文件。`server.watcher` 将提供兼容的事件发射器，但调用 `add` 或 `unwatch` 将不起作用。
->>>>>>> upstream/main
 
 ::: warning 监听 `node_modules` 中的文件
 
@@ -311,21 +273,13 @@ Vite 服务器的文件监听器默认会监听 `root` 目录，同时会跳过 
 - **推荐**：使用 WSL2 应用来编辑你的文件
   - 同时我们推荐将你的项目移出 Windows 文件系统，从 WSL2 访问 Windows 文件系统非常慢。移除这一开销将大大提升性能表现。
 - 设置 `{ usePolling: true }`
-<<<<<<< HEAD
-  - 注意 [`usePolling` 会导致高 CPU 占用率](https://github.com/paulmillr/chokidar#performance)
-=======
   - 注意 [`usePolling` 会导致高 CPU 占用率](https://github.com/paulmillr/chokidar/tree/3.6.0#performance)
->>>>>>> upstream/main
 
 :::
 
 ## server.middlewareMode {#server-middlewaremode}
 
-<<<<<<< HEAD
-- **类型：** `'ssr' | 'html'`
-=======
 - **类型：** `boolean`
->>>>>>> upstream/main
 - **默认值：** `false`
 
 以中间件模式创建 Vite 服务器。
@@ -344,12 +298,8 @@ async function createServer() {
   // 以中间件模式创建 Vite 服务器
   const vite = await createViteServer({
     server: { middlewareMode: true },
-<<<<<<< HEAD
-    appType: 'custom', // 不引入 Vite 默认的 HTML 处理中间件
-=======
     appType: 'custom',
     // 不引入 Vite 默认的 HTML 处理中间件
->>>>>>> upstream/main
   })
   // 将 vite 的 connect 实例作中间件使用
   app.use(vite.middlewares)
@@ -427,17 +377,6 @@ export default defineConfig({
 
 用于限制 Vite 开发服务器提供敏感文件的黑名单。这会比 [`server.fs.allow`](#server-fs-allow) 选项的优先级更高。同时还支持 [picomatch 模式](https://github.com/micromatch/picomatch#globbing-features)。
 
-<<<<<<< HEAD
-## server.fs.cachedChecks
-
-- **类型：** `boolean`
-- **默认：** `false`
-- **实验性**
-
-该选项可以缓存访问过的目录的文件名，从而避免重复的文件系统操作。尤其在 Windows 系统中，这个选项可能会带来性能提升。但由于存在一些边缘情况，比如在一个已缓存的文件夹中写入文件并立即导入它，所以这个选项默认是关闭的。
-
-=======
->>>>>>> upstream/main
 ## server.origin {#server-origin}
 
 - **类型：** `string`

@@ -126,15 +126,9 @@ const { isCardActive, startAnimation } = useCardAnimation(
       <div class="center-glow" />
     </div>
     <div class="feature__meta meta--center">
-<<<<<<< HEAD
       <div class="meta__title">我们的团队</div>
       <div class="meta__description">
         技术部、宣传部、电竞部
-=======
-      <div class="meta__title">丰富的功能</div>
-      <div class="meta__description">
-        对 TypeScript、JSX、CSS 等支持开箱即用
->>>>>>> upstream/main
       </div>
     </div>
   </div>

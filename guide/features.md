@@ -71,20 +71,6 @@ export type { T }
 
 - [TypeScript 文档](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-<<<<<<< HEAD
-从 Vite v2.5.0 开始，如果 TypeScript 的 target 是 `ESNext` 或 `ES2022` 及更新版本，此选项默认值则为 `true`。这与 [`tsc` v4.3.2 及以后版本的行为](https://github.com/microsoft/TypeScript/pull/42663) 一致。这也是标准的 ECMAScript 的运行时行为。
-
-若设了其他 TypeScript target，则本项会默认为 `false`.
-
-但对于那些习惯其他编程语言或旧版本 TypeScript 的开发者来说，这可能是违反直觉的。
-你可以参阅 [TypeScript 3.7 发布日志](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier) 中了解更多关于如何兼容的信息。
-
-如果你正在使用一个严重依赖 class fields 的库，请注意该库对此选项的预期设置。
-
-大多数库都希望 `"useDefineForClassFields": true`，如 [MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties)。
-
-但是有几个库还没有兼容这个新的默认值，其中包括 [`lit-element`](https://github.com/lit/lit-element/issues/1030)。如果遇到这种情况，请将 `useDefineForClassFields` 设置为 `false`。
-=======
 如果 TypeScript 的 target 是 `ES2022` 或更高版本，包括 `ESNext`，那么默认值将为 `true`。这与 [TypeScript 4.3.2 及以后版本的行为](https://github.com/microsoft/TypeScript/pull/42663) 保持一致。
 若设了其他 TypeScript target，则本项会默认为 `false`.
 
@@ -92,7 +78,6 @@ export type { T }
 
 如果你正在使用一个严重依赖 class fields 的库，请注意该库对此选项的预期设置。
 虽然大多数库期望 `"useDefineForClassFields": true`，但如果你的库不支持它，你可以明确地将 `useDefineForClassFields` 设置为 `false`。
->>>>>>> upstream/main
 
 #### `target` {#target}
 
@@ -134,31 +119,18 @@ Vite 默认的类型定义是写给它的 Node.js API 的。要将其补充到�
 /// <reference types="vite/client" />
 ```
 
-<<<<<<< HEAD
-=======
 ::: details 使用 `compilerOptions.types`
 
->>>>>>> upstream/main
 或者，你也可以将 `vite/client` 添加到 `tsconfig.json` 中的 `compilerOptions.types` 下：
 
 ```json [tsconfig.json]
 {
   "compilerOptions": {
-<<<<<<< HEAD
-    "types": ["vite/client"]
-=======
     "types": ["vite/client", "some-other-global-lib"]
->>>>>>> upstream/main
   }
 }
 ```
 
-<<<<<<< HEAD
-这将会提供以下类型定义补充：
-
-- 资源导入 (例如：导入一个 `.svg` 文件)
-- `import.meta.env` 上 Vite 注入的环境变量的类型定义
-=======
 需要注意的是，如果指定了 [`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types)，则只有这些包会被包含在全局作用域内（而不是所有的“@types”包）。
 
 :::
@@ -167,7 +139,6 @@ Vite 默认的类型定义是写给它的 Node.js API 的。要将其补充到�
 
 - 资源导入 (例如：导入一个 `.svg` 文件)
 - `import.meta.env` 上 Vite 注入的 [常量](./env-and-mode#env-variables) 的类型定义
->>>>>>> upstream/main
 - `import.meta.hot` 上的 [HMR API](./api-hmr) 类型定义
 
 ::: tip
@@ -190,16 +161,6 @@ Vite 默认的类型定义是写给它的 Node.js API 的。要将其补充到�
 
 :::
 
-<<<<<<< HEAD
-## Vue {#vue}
-
-Vite 为 Vue 提供第一优先级支持：
-
-- Vue 3 单文件组件支持：[@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Vue 3 JSX 支持：[@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Vue 2.7 SFC 支持：[@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Vue 2.7 JSX 支持：[@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
-=======
 ## HTML {#html}
 
 HTML 文件位于 Vite 项目的[最前端和中心](/guide/#index-html-and-project-root)，作为应用程序的入口点，可轻松构建单页和[多页应用程序](/guide/build.html#multi-page-app)。
@@ -254,21 +215,14 @@ HTML 文件位于 Vite 项目的[最前端和中心](/guide/#index-html-and-proj
 - React 使用 SWC 的支持：[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
 查看 [插件指南](/plugins/) 了解更多信息。
->>>>>>> upstream/main
 
 ## JSX {#jsx}
 
 `.jsx` 和 `.tsx` 文件同样开箱即用。JSX 的转译同样是通过 [esbuild](https://esbuild.github.io)。
 
-<<<<<<< HEAD
-Vue 用户应使用官方提供的 [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) 插件，它提供了 Vue 3 特性的支持，包括 HMR，全局组件解析，指令和插槽。
-
-如果不是在 React 或 Vue 中使用 JSX，自定义的 `jsxFactory` 和 `jsxFragment` 可以使用 [`esbuild` 选项](/config/shared-options.md#esbuild) 进行配置。例如对 Preact：
-=======
 你选择的框架已经可以开箱即用地配置 JSX（例如，Vue 用户应使用官方的 [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) 插件，它提供了 Vue 3 特定的功能，包括 HMR，全局组件解析，指令和插槽）。
 
 如果你使用自己的框架运行 JSX，可以使用 [`esbuild` 选项](/config/shared-options.md#esbuild) 来配置自定义的 `jsxFactory` 和 `jsxFragment`。例如，Preact 插件会使用：
->>>>>>> upstream/main
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -344,11 +298,7 @@ document.getElementById('foo').className = applyColor
 
 由于 Vite 的目标仅为现代浏览器，因此建议使用原生 CSS 变量和实现 CSSWG 草案的 PostCSS 插件（例如 [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)）来编写简单的、符合未来标准的 CSS。
 
-<<<<<<< HEAD
-话虽如此，但 Vite 也同时提供了对 `.scss`, `.sass`, `.less`, `.styl` 和 `.stylus` 文件的内置支持。没有必要为它们安装特定的 Vite 插件，但必须安装相应的预处理器依赖：
-=======
 话虽如此，但 Vite 也同时提供了对 `.scss`，`.sass`，`.less`，`.styl` 和 `.stylus` 文件的内置支持。没有必要为它们安装特定的 Vite 插件，但必须安装相应的预处理器依赖：
->>>>>>> upstream/main
 
 ```bash
 # .scss 和 .sass
@@ -473,13 +423,8 @@ const modules = import.meta.glob('./dir/*.js')
 ```js
 // vite 生成的代码
 const modules = {
-<<<<<<< HEAD
-  './dir/foo.js': () => import('./dir/foo.js'),
-  './dir/bar.js': () => import('./dir/bar.js'),
-=======
   './dir/bar.js': () => import('./dir/bar.js'),
   './dir/foo.js': () => import('./dir/foo.js'),
->>>>>>> upstream/main
 }
 ```
 
@@ -505,19 +450,11 @@ const modules = import.meta.glob('./dir/*.js', { eager: true })
 
 ```js
 // vite 生成的代码
-<<<<<<< HEAD
-import * as __glob__0_0 from './dir/foo.js'
-import * as __glob__0_1 from './dir/bar.js'
-const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
-=======
 import * as __vite_glob_0_0 from './dir/bar.js'
 import * as __vite_glob_0_1 from './dir/foo.js'
 const modules = {
   './dir/bar.js': __vite_glob_0_0,
   './dir/foo.js': __vite_glob_0_1,
->>>>>>> upstream/main
 }
 ```
 
@@ -561,13 +498,8 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```ts
 // vite 生成的代码
 const modules = {
-<<<<<<< HEAD
-  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
-  './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
-=======
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
   './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
->>>>>>> upstream/main
 }
 ```
 
@@ -584,19 +516,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // vite 生成的代码
-<<<<<<< HEAD
-import { setup as __glob__0_0 } from './dir/foo.js'
-import { setup as __glob__0_1 } from './dir/bar.js'
-const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
-=======
 import { setup as __vite_glob_0_0 } from './dir/bar.js'
 import { setup as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
   './dir/bar.js': __vite_glob_0_0,
   './dir/foo.js': __vite_glob_0_1,
->>>>>>> upstream/main
 }
 ```
 
@@ -613,19 +537,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // vite 生成的代码
-<<<<<<< HEAD
-import __glob__0_0 from './dir/foo.js'
-import __glob__0_1 from './dir/bar.js'
-const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
-=======
 import { default as __vite_glob_0_0 } from './dir/bar.js'
 import { default as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
   './dir/bar.js': __vite_glob_0_0,
   './dir/foo.js': __vite_glob_0_1,
->>>>>>> upstream/main
 }
 ```
 
@@ -649,21 +565,12 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```ts
 // vite 生成的代码
 const moduleStrings = {
-<<<<<<< HEAD
-  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
-}
-const moduleUrls = {
-  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
-=======
   './dir/bar.svg': () => import('./dir/bar.svg?raw').then((m) => m['default']),
   './dir/foo.svg': () => import('./dir/foo.svg?raw').then((m) => m['default']),
 }
 const moduleUrls = {
   './dir/bar.svg': () => import('./dir/bar.svg?url').then((m) => m['default']),
   './dir/foo.svg': () => import('./dir/foo.svg?url').then((m) => m['default']),
->>>>>>> upstream/main
 }
 ```
 
@@ -872,11 +779,7 @@ Vite 会为入口 chunk 和它们在打包出的 HTML 中的直接引入自动�
 在实际项目中，Rollup 通常会生成 “共用” chunk —— 被两个或以上的其他 chunk 共享的 chunk。与动态导入相结合，会很容易出现下面这种场景：
 
 <script setup>
-<<<<<<< HEAD
-import graphSvg from '../images/archives/graph.svg?raw'
-=======
 import graphSvg from '../images/graph.svg?raw'
->>>>>>> upstream/main
 </script>
 <svg-image :svg="graphSvg" />
 
