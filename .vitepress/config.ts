@@ -98,11 +98,6 @@ export default defineConfig({
   themeConfig: {
     logo: '/kjxh.png',
 
-    editLink: {
-      pattern: 'https://github.com/vitejs/docs-cn/edit/main/:path',
-      text: '为此页提供修改建议',
-    },
-
     outline: {
       label: '本页目录',
       level: [2, 3],
