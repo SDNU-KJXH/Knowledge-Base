@@ -1,6 +1,6 @@
 ---
-title: 芝士科协
-titleTemplate: 山东师范大学科技协会官方网站和知识库
+title: 山东师范大学科技协会
+titleTemplate: 官方网站和知识库
 pageClass: landing dark
 
 layout: home
@@ -28,20 +28,20 @@ import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/
 
 <div class="VPHome">
   <Hero/>
-  <FeatureSection title="重新定义开发者体验" description="Vite 让 Web 开发重回简单" type="blue">
+  <FeatureSection title="山东师范大学科技协会" description="弘扬科技理念，传播科技知识" type="blue">
     <FeatureInstantServerStart />
     <FeatureHMR />
-    <FeatureRichFeatures />
+    <!-- <FeatureRichFeatures /> -->
     <FeatureOptimizedBuild />
   </FeatureSection>
-  <FeatureSection title="共同构建的坚实基础" type="pink" class="feature-section--flip">
+  <!-- <FeatureSection title="共同构建的坚实基础" type="pink" class="feature-section--flip">
     <FeatureFlexiblePlugins />
     <FeatureTypedAPI />
     <FeatureSSRSupport />
     <FeatureCI />
-  </FeatureSection>
+  </FeatureSection> -->
   <FrameworksSection />
-  <CommunitySection />
-  <SponsorSection />
+  <!-- <CommunitySection /> -->
+  <!-- <SponsorSection /> -->
   <GetStartedSection />
 </div>

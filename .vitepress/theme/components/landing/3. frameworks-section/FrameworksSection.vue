@@ -306,7 +306,7 @@ const rowStyle: ComputedRef<{ transform: string }> = computed(() => {
 
 <template>
   <section class="frameworks-section" id="frameworks-section">
-    <h2>我们精通软件的安装和卸载</h2>
+    <h2>我们免费提供系统重装和软件安装服务</h2>
     <div class="frameworks-container">
       <!-- Top Row -->
       <div class="framework-row" :style="rowStyle">

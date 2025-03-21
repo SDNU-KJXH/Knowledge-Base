@@ -7,12 +7,12 @@ import HeroDiagram from './HeroDiagram.vue'
     <div class="container">
       <!-- ViteConf Replay Button -->
       <a
-        href="https://ed.qcea.top"
+        href="https://naochat.cnies.org"
         class="hero__pill"
         target="_blank"
       >
-        <img src="/viteconf.svg" alt="Viteconf logo" width="20" height="20" />
-        <span>点击使用免费的满血版DeepSeek R1</span>
+        <img src="/deepseek.png" alt="NAO Chat Logo" width="20" height="20" />
+        <span>点击使用科协满血版DeepSeek R1</span>
       </a>
 
       <!-- Heading -->
@@ -27,7 +27,7 @@ import HeroDiagram from './HeroDiagram.vue'
         <a href="/guide/" class="btn btn--primary">电脑知识</a>
         <a href="https://ed.qcea.top" class="btn btn--primary">购买指南</a>
         <a href="https://ed.qcea.top" class="btn btn--primary">软件推荐</a>
-        <a href="https://ed.qcea.top" class="btn btn--primary">活动专栏</a>
+        <a href="https://ed.qcea.top" class="btn btn--primary">科协活动</a>
         <a
           href="https://github.com/vitejs/vite"
           target="_blank"
@@ -39,7 +39,6 @@ import HeroDiagram from './HeroDiagram.vue'
     </div>
 
     <!-- Animated Diagram -->
-    <HeroDiagram />
   </div>
 </template>
 
