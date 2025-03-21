@@ -8,11 +8,11 @@ const { releaseTag } = useReleaseTag()
   <a
     v-if="releaseTag"
     class="VPNavBarReleaseLink link"
-    href="https://github.com/vitejs/docs-cn/releases"
+    href="https://chat.sdnuroboticslab.cn"
     target="_blank"
     tabindex="0"
   >
-    <span>{{ releaseTag }}</span>
+    <span>满血DeepSeek R1</span>
   </a>
 </template>
 
@@ -27,5 +27,11 @@ const { releaseTag } = useReleaseTag()
   color: var(--vp-c-text-1);
   transition: color 0.25s;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .VPNavBarReleaseLink {
+    display: none;
+  }
 }
 </style>

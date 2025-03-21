@@ -71,18 +71,13 @@ export type { T }
 
 - [TypeScript 文档](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-从 Vite v2.5.0 开始，如果 TypeScript 的 target 是 `ESNext` 或 `ES2022` 及更新版本，此选项默认值则为 `true`。这与 [`tsc` v4.3.2 及以后版本的行为](https://github.com/microsoft/TypeScript/pull/42663) 一致。这也是标准的 ECMAScript 的运行时行为。
-
+如果 TypeScript 的 target 是 `ES2022` 或更高版本，包括 `ESNext`，那么默认值将为 `true`。这与 [TypeScript 4.3.2 及以后版本的行为](https://github.com/microsoft/TypeScript/pull/42663) 保持一致。
 若设了其他 TypeScript target，则本项会默认为 `false`.
 
-但对于那些习惯其他编程语言或旧版本 TypeScript 的开发者来说，这可能是违反直觉的。
-你可以参阅 [TypeScript 3.7 发布日志](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier) 中了解更多关于如何兼容的信息。
+`true` 是标准的 ECMAScript 运行时行为。
 
 如果你正在使用一个严重依赖 class fields 的库，请注意该库对此选项的预期设置。
-
-大多数库都希望 `"useDefineForClassFields": true`，如 [MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties)。
-
-但是有几个库还没有兼容这个新的默认值，其中包括 [`lit-element`](https://github.com/lit/lit-element/issues/1030)。如果遇到这种情况，请将 `useDefineForClassFields` 设置为 `false`。
+虽然大多数库期望 `"useDefineForClassFields": true`，但如果你的库不支持它，你可以明确地将 `useDefineForClassFields` 设置为 `false`。
 
 #### `target` {#target}
 
@@ -124,20 +119,26 @@ Vite 默认的类型定义是写给它的 Node.js API 的。要将其补充到�
 /// <reference types="vite/client" />
 ```
 
+::: details 使用 `compilerOptions.types`
+
 或者，你也可以将 `vite/client` 添加到 `tsconfig.json` 中的 `compilerOptions.types` 下：
 
 ```json [tsconfig.json]
 {
   "compilerOptions": {
-    "types": ["vite/client"]
+    "types": ["vite/client", "some-other-global-lib"]
   }
 }
 ```
 
-这将会提供以下类型定义补充：
+需要注意的是，如果指定了 [`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types)，则只有这些包会被包含在全局作用域内（而不是所有的“@types”包）。
+
+:::
+
+`vite/client` 会提供以下类型定义补充：
 
 - 资源导入 (例如：导入一个 `.svg` 文件)
-- `import.meta.env` 上 Vite 注入的环境变量的类型定义
+- `import.meta.env` 上 Vite 注入的 [常量](./env-and-mode#env-variables) 的类型定义
 - `import.meta.hot` 上的 [HMR API](./api-hmr) 类型定义
 
 ::: tip
@@ -160,22 +161,68 @@ Vite 默认的类型定义是写给它的 Node.js API 的。要将其补充到�
 
 :::
 
-## Vue {#vue}
+## HTML {#html}
 
-Vite 为 Vue 提供第一优先级支持：
+HTML 文件位于 Vite 项目的[最前端和中心](/guide/#index-html-and-project-root)，作为应用程序的入口点，可轻松构建单页和[多页应用程序](/guide/build.html#multi-page-app)。
 
-- Vue 3 单文件组件支持：[@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Vue 3 JSX 支持：[@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Vue 2.7 SFC 支持：[@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Vue 2.7 JSX 支持：[@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+项目根目录中的任何 HTML 文件都可以通过各自的目录路径直接访问：
+
+- `<root>/index.html` -> `http://localhost:5173/`
+- `<root>/about.html` -> `http://localhost:5173/about.html`
+- `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
+
+由 HTML 元素引用的资源，例如 `<script type="module" src>` 和 `<link href>`，会作为应用的一部分进行处理和打包。支持的完整元素列表如下：
+
+- `<audio src>`
+- `<embed src>`
+- `<img src>` 和 `<img srcset>`
+- `<image src>`
+- `<input src>`
+- `<link href>` 和 `<link imagesrcset>`
+- `<object data>`
+- `<script type="module" src>`
+- `<source src>` 和 `<source srcset>`
+- `<track src>`
+- `<use href>` 和 `<use xlink:href>`
+- `<video src>` 和 `<video poster>`
+- `<meta content>`
+  - 仅当 `name` 属性匹配以下值时：`msapplication-tileimage`，`msapplication-square70x70logo`，`msapplication-square150x150logo`，`msapplication-wide310x150logo`，`msapplication-square310x310logo`，`msapplication-config`，或 `twitter:image`
+  - 或仅当 `property` 属性匹配以下值时：`og:image`，`og:image:url`，`og:image:secure_url`，`og:audio`，`og:audio:secure_url`，`og:video`，或 `og:video:secure_url`
+
+```html {4-5,8-9}
+<!doctype html>
+<html>
+  <head>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <img src="/src/images/logo.svg" alt="logo" />
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+要退出对某些元素的 HTML 处理，可以在元素上添加 `vite-ignore` 属性，这在引用外部 assets 或 CDN 时非常有用。
+
+## 框架支持 {#frameworks}
+
+所有现代框架都已和 Vite 集成。大多数框架插件由各自的框架团队维护，唯有官方的 Vue 和 React Vite 插件由 Vite 组织维护。
+
+- Vue 支持：[@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Vue JSX 支持：[@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- React 支持：[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
+- React 使用 SWC 的支持：[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+查看 [插件指南](/plugins/) 了解更多信息。
 
 ## JSX {#jsx}
 
 `.jsx` 和 `.tsx` 文件同样开箱即用。JSX 的转译同样是通过 [esbuild](https://esbuild.github.io)。
 
-Vue 用户应使用官方提供的 [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) 插件，它提供了 Vue 3 特性的支持，包括 HMR，全局组件解析，指令和插槽。
+你选择的框架已经可以开箱即用地配置 JSX（例如，Vue 用户应使用官方的 [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) 插件，它提供了 Vue 3 特定的功能，包括 HMR，全局组件解析，指令和插槽）。
 
-如果不是在 React 或 Vue 中使用 JSX，自定义的 `jsxFactory` 和 `jsxFragment` 可以使用 [`esbuild` 选项](/config/shared-options.md#esbuild) 进行配置。例如对 Preact：
+如果你使用自己的框架运行 JSX，可以使用 [`esbuild` 选项](/config/shared-options.md#esbuild) 来配置自定义的 `jsxFactory` 和 `jsxFragment`。例如，Preact 插件会使用：
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -251,7 +298,7 @@ document.getElementById('foo').className = applyColor
 
 由于 Vite 的目标仅为现代浏览器，因此建议使用原生 CSS 变量和实现 CSSWG 草案的 PostCSS 插件（例如 [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)）来编写简单的、符合未来标准的 CSS。
 
-话虽如此，但 Vite 也同时提供了对 `.scss`, `.sass`, `.less`, `.styl` 和 `.stylus` 文件的内置支持。没有必要为它们安装特定的 Vite 插件，但必须安装相应的预处理器依赖：
+话虽如此，但 Vite 也同时提供了对 `.scss`，`.sass`，`.less`，`.styl` 和 `.stylus` 文件的内置支持。没有必要为它们安装特定的 Vite 插件，但必须安装相应的预处理器依赖：
 
 ```bash
 # .scss 和 .sass
@@ -376,8 +423,8 @@ const modules = import.meta.glob('./dir/*.js')
 ```js
 // vite 生成的代码
 const modules = {
-  './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js'),
+  './dir/foo.js': () => import('./dir/foo.js'),
 }
 ```
 
@@ -403,11 +450,11 @@ const modules = import.meta.glob('./dir/*.js', { eager: true })
 
 ```js
 // vite 生成的代码
-import * as __glob__0_0 from './dir/foo.js'
-import * as __glob__0_1 from './dir/bar.js'
+import * as __vite_glob_0_0 from './dir/bar.js'
+import * as __vite_glob_0_1 from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -451,8 +498,8 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```ts
 // vite 生成的代码
 const modules = {
-  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
+  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
 }
 ```
 
@@ -469,11 +516,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // vite 生成的代码
-import { setup as __glob__0_0 } from './dir/foo.js'
-import { setup as __glob__0_1 } from './dir/bar.js'
+import { setup as __vite_glob_0_0 } from './dir/bar.js'
+import { setup as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -490,11 +537,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // vite 生成的代码
-import __glob__0_0 from './dir/foo.js'
-import __glob__0_1 from './dir/bar.js'
+import { default as __vite_glob_0_0 } from './dir/bar.js'
+import { default as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -518,12 +565,12 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```ts
 // vite 生成的代码
 const moduleStrings = {
-  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?raw').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?raw').then((m) => m['default']),
 }
 const moduleUrls = {
-  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?url').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?url').then((m) => m['default']),
 }
 ```
 

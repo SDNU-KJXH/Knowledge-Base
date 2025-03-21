@@ -8,8 +8,7 @@ title: 配置 Vite
 
 最基础的配置文件是这样的：
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default {
   // 配置选项
 }
@@ -22,6 +21,12 @@ export default {
 ```bash
 vite --config my-config.js
 ```
+
+::: tip 加载配置文件
+默认情况下，Vite 使用 `esbuild` 将配置文件打包到临时文件中并加载它。这可能会在 monorepo 中导入 TypeScript 文件时引发问题。如果你遇到了这种方法问题，可以通过指定 `--configLoader runner` 以改用 [module runner](/guide/api-environment-runtimes.html#modulerunner)，它不会创建临时配置并将动态转换任何文件。请注意，module runner 不支持配置文件中的 CJS，但外部 CJS 包应该可以正常工作。
+
+另外，如果你正在使用支持TypeScript的环境（例如 `node --experimental-strip-types`），或者只编写纯 JavaScript 代码，你可以指定 `--configLoader native` 以使用环境的本机运行时加载配置文件。请注意，配置文件导入的模块的更新不会被检测到，因此不会自动重启 Vite 服务器。
+:::
 
 ## 配置智能提示 {#config-intellisense}
 
@@ -56,7 +61,7 @@ export default {
 
 ## 情景配置 {#conditional-config}
 
-如果配置文件需要基于（`dev`/`serve` 或 `build`）命令或者不同的 [模式](/guide/env-and-mode) 来决定选项，亦或者是一个 SSR 构建（`isSsrBuild`）、一个正在预览的构建产物（`isPreview`），则可以选择导出这样一个函数：
+如果配置文件需要基于（`serve` 或 `build`）命令或者不同的 [模式](/guide/env-and-mode#modes) 来决定选项，亦或者是一个 SSR 构建（`isSsrBuild`）、一个正在预览的构建产物（`isPreview`），则可以选择导出这样一个函数：
 
 ```js twoslash
 import { defineConfig } from 'vite'
@@ -103,9 +108,10 @@ export default defineConfig(async ({ command, mode }) => {
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   // 根据当前工作目录中的 `mode` 加载 .env 文件
-  // 设置第三个参数为 '' 来加载所有环境变量，而不管是否有 `VITE_` 前缀。
+  // 设置第三个参数为 '' 来加载所有环境变量，而不管是否有
+  // `VITE_` 前缀。
   const env = loadEnv(mode, process.cwd(), '')
   return {
     // vite 配置
@@ -114,4 +120,20 @@ export default defineConfig(({ command, mode }) => {
     },
   }
 })
+```
+
+## 在 VS Code 上调试配置文件 {#debugging-the-config-file-on-vs-code}
+
+在默认的 `--configLoader bundle` 行为下，Vite 会将生成的临时配置文件写入 `node_modules/.vite-temp` 文件夹，在 Vite 配置文件中设置断点调试时会出现文件未找到的错误。要修复该问题，请在 `.vscode/settings.json` 中添加以下配置：
+
+```json
+{
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "!**/node_modules/**",
+      "**/node_modules/.vite-temp/**"
+    ]
+  }
+}
 ```

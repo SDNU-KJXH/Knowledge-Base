@@ -107,7 +107,7 @@
           </radialGradient>
         </defs>
       </svg>
-      <img src="/logo.svg" alt="Vite Logo" class="vite-chip__logo" />
+      <img src="/kjxh.png" alt="kjxh Logo" class="vite-chip__logo" />
     </div>
     <h2>开启电脑世界的探索之旅叭</h2>
     <h3>

@@ -1,4 +1,4 @@
-# JavaScript API {#javascript-api}
+上 # JavaScript API {#javascript-api}
 
 Vite 的 JavaScript API 是完全类型化的，我们推荐使用 TypeScript 或者在 VS Code 中启用 JS 类型检查来利用智能提示和类型签名。
 
@@ -109,8 +109,8 @@ interface ViteDevServer {
   httpServer: http.Server | null
   /**
    * chokidar 监听器实例。如果 `config.server.watch` 被设置为 `null`，
-   * 它不会监听任何文件，并且调用 `add` 将不起作用。
-   * https://github.com/paulmillr/chokidar#getting-started
+   * 它不会监听任何文件，并且调用 `add` 或 `unwatch` 将不起作用。
+   * https://github.com/paulmillr/chokidar/tree/3.6.0#api
    */
   watcher: FSWatcher
   /**

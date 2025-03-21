@@ -247,9 +247,9 @@ const { startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">不知道写什么</div>
+      <div class="meta__title">校级社团组织</div>
       <div class="meta__description">
-        不知道写什么
+        科技协会由信息科学与工程学院的技术骨干组成的学术社团组织
       </div>
     </div>
   </div>

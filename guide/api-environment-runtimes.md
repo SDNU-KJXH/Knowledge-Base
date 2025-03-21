@@ -1,14 +1,14 @@
 # 用于运行时的环境 API {#environment-api-for-runtimes}
 
 :::warning 实验性
-这个 API 的初始版本在 Vite 5.1 中以 "Vite Runtime API" 的名字被引入。这份指南介绍了经过修订后的 API，被重新命名为环境 API（Environment API）。这个 API 将在 Vite 6 中作为实验性功能发布。你现在已经可以在最新的 `vite@6.0.0-beta.x` 版本中进行测试。
+环境 API 是实验性的。在 Vite 6 期间，我们将保持这些 API 的稳定，以便生态系统可以在其基础上进行实验和构建。我们计划在 Vite 7 中稳定这些新 API，并可能进行一些重大更改。
 
 资料：
 
 - [反馈讨论](https://github.com/vitejs/vite/discussions/16358) 我们在此处收集新 API 的反馈。
 - [环境 API PR](https://github.com/vitejs/vite/pull/16471) 新 API 在此处被实现并进行了审查。
 
-在参与测试这个提议的过程中，请与我们分享您的反馈。
+请与我们分享您的反馈。
 :::
 
 ## 环境工厂 {#environment-factories}
@@ -16,7 +16,7 @@
 环境工厂（Environments factory）旨在由环境提供者（如 Cloudflare）实现，而不是由终端用户实现。环境工厂返回一个 `EnvironmentOptions`，用于在开发和构建环境中使用目标运行时的最常见情况。默认环境选项也可以设置，因此用户无需手动配置。
 
 ```ts
-function createWorkedEnvironment(
+function createWorkerdEnvironment(
   userConfig: EnvironmentOptions,
 ): EnvironmentOptions {
   return mergeConfig(
@@ -29,7 +29,8 @@ function createWorkedEnvironment(
       dev: {
         createEnvironment(name, config) {
           return createWorkerdDevEnvironment(name, config, {
-            hot: customHotChannel(),
+            hot: true,
+            transport: customHotChannel(),
           })
         },
       },
@@ -82,25 +83,26 @@ Vite 模块运行器允许首先使用 Vite 插件处理代码来运行任何代
 此功能的目标之一是提供一个可定制的 API 来处理和运行代码。用户可以使用暴露的基础组件创建新的环境工厂。
 
 ```ts
-import { DevEnvironment, RemoteEnvironmentTransport } from 'vite'
+import { DevEnvironment, HotChannel } from 'vite'
 
-function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, context: DevEnvironmentContext) {
-  const hot = /* ... */
+function createWorkerdDevEnvironment(
+  name: string,
+  config: ResolvedConfig,
+  context: DevEnvironmentContext
+) {
   const connection = /* ... */
-  const transport = new RemoteEnvironmentTransport({
+  const transport: HotChannel = {
+    on: (listener) => { connection.on('message', listener) },
     send: (data) => connection.send(data),
-    onMessage: (listener) => connection.on('message', listener),
-  })
+  }
 
   const workerdDevEnvironment = new DevEnvironment(name, config, {
     options: {
       resolve: { conditions: ['custom'] },
       ...context.options,
     },
-    hot,
-    remoteRunner: {
-      transport,
-    },
+    hot: true,
+    transport,
   })
   return workerdDevEnvironment
 }
@@ -116,11 +118,12 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
 export class ModuleRunner {
   constructor(
     public options: ModuleRunnerOptions,
-    public evaluator: ModuleEvaluator,
+    public evaluator: ModuleEvaluator = new ESModulesEvaluator(),
     private debug?: ModuleRunnerDebugger,
   ) {}
   /**
-   * 要执行的 URL。可以是文件路径，服务器路径，或者相对于根路径的 id
+   * 要执行的 URL。
+   * 可以是文件路径，服务器路径，或者相对于根路径的 id
    */
   public async import<T = any>(url: string): Promise<T>
   /**
@@ -133,7 +136,7 @@ export class ModuleRunner {
    */
   public async close(): Promise<void>
   /**
-   * 如果通过调用 `close()` 方法关闭了运行器，则返回 `true`
+   * 如果通过调用 `close()` 关闭了运行器，则返回 `true`
    */
   public isClosed(): boolean
 }
@@ -147,13 +150,11 @@ export class ModuleRunner {
 
 ```js
 import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
-import { root, fetchModule } from './rpc-implementation.js'
+import { transport } from './rpc-implementation.js'
 
 const moduleRunner = new ModuleRunner(
   {
-    root,
-    fetchModule,
-    // 你也可以提供 hmr.connection 来支持 HMR
+    transport,
   },
   new ESModulesEvaluator(),
 )
@@ -163,20 +164,32 @@ await moduleRunner.import('/src/entry-point.js')
 
 ## `ModuleRunnerOptions`
 
-```ts
-export interface ModuleRunnerOptions {
-  /**
-   * 项目根目录
-   */
-  root: string
+```ts twoslash
+import type {
+  InterceptorOptions as InterceptorOptionsRaw,
+  ModuleRunnerHmr as ModuleRunnerHmrRaw,
+  EvaluatedModules,
+} from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type InterceptorOptions = Debug<InterceptorOptionsRaw>
+type ModuleRunnerHmr = Debug<ModuleRunnerHmrRaw>
+/** 见下文 */
+type ModuleRunnerTransport = unknown
+
+// ---cut---
+interface ModuleRunnerOptions {
   /**
    * 一组与服务器通信的方法
    */
-  transport: RunnerTransport
+  transport: ModuleRunnerTransport
   /**
-   * 配置如何解析源映射。如果 `process.setSourceMapsEnabled` 可用，首选 `node`
-   * 否则，它将默认使用 `prepareStackTrace`，这将覆盖 `Error.prepareStackTrace` 方法
-   * 你可以提供一个对象来配置如何解析未被 Vite 处理的文件的内容和其源映射
+   * 配置如何解析源映射。
+   * 如果 `process.setSourceMapsEnabled` 可用，首选 `node`
+   * 否则，它将默认使用 `prepareStackTrace`，这将
+   * 覆盖 `Error.prepareStackTrace` 方法
+   * 你可以提供一个对象来配置如何解析
+   * 未被 Vite 处理的文件的内容和其源映射
    */
   sourcemapInterceptor?:
     | false
@@ -185,21 +198,13 @@ export interface ModuleRunnerOptions {
     | InterceptorOptions
   /**
    * 禁用 HMR 或配置 HMR 选项
+   *
+   * @default true
    */
-  hmr?:
-    | false
-    | {
-        /**
-         * 配置 HMR 如何在客户端和服务器之间通信
-         */
-        connection: ModuleRunnerHMRConnection
-        /**
-         * 配置 HMR 日志
-         */
-        logger?: false | HMRLogger
-      }
+  hmr?: boolean | ModuleRunnerHmr
   /**
-   * 自定义模块缓存。如果未提供，它将为每个模块运行器实例创建一个单独的模块缓存
+   * 自定义模块缓存。如果未提供，它将创建一个单独的模块缓存给
+   * 每个模块运行器实例
    */
   evaluatedModules?: EvaluatedModules
 }
@@ -209,7 +214,13 @@ export interface ModuleRunnerOptions {
 
 **类型签名：**
 
-```ts
+```ts twoslash
+import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type ModuleRunnerContext = Debug<ModuleRunnerContextRaw>
+
+// ---cut---
 export interface ModuleEvaluator {
   /**
    *  转换后代码中前缀行的数量。
@@ -236,59 +247,92 @@ export interface ModuleEvaluator {
 
 Vite 默认导出了实现此接口的 `ESModulesEvaluator`。它使用 `new AsyncFunction` 来执行代码，因此，如果代码有内联源映射，它应该包含 [2 行的偏移](https://tc39.es/ecma262/#sec-createdynamicfunction) 以适应新增的行。这是由 `ESModulesEvaluator` 自动完成的。自定义评估器不会添加额外的行。
 
-## RunnerTransport
+## `ModuleRunnerTransport` {#modulerunnertransport}
 
 **类型签名：**
 
-```ts
-interface RunnerTransport {
-  /**
-   * 获取模块信息的方法
-   */
-  fetchModule: FetchFunction
+```ts twoslash
+import type { ModuleRunnerTransportHandlers } from 'vite/module-runner'
+/** 一个对象 */
+type HotPayload = unknown
+// ---cut---
+interface ModuleRunnerTransport {
+  connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
+  disconnect?(): Promise<void> | void
+  send?(data: HotPayload): Promise<void> | void
+  invoke?(data: HotPayload): Promise<{ result: any } | { error: any }>
+  timeout?: number
 }
 ```
 
-通过 RPC 或直接调用函数与环境通信的传输对象。默认情况下，你需要传递一个带有 `fetchModule` 方法的对象 - 它可以在其中使用任何类型的 RPC，但 Vite 也通过 `RemoteRunnerTransport` 类暴露双向传输接口，以使配置更容易。你需要将它与服务器上的 `RemoteEnvironmentTransport` 实例配对，就像在这个例子中，模块运行器在工作线程中创建：
+通过 RPC 或直接调用函数与环境通信的传输对象。如果未执行 `invoke` 方法，则必须执行 `send` 方法和 `connect` 方法。Vite 将在内部构建 `invoke` 方法。
+
+你需要将它与服务器上的 `HotChannel` 实例结合起来，就像本例中在工作线程中创建模块运行程序一样：
 
 ::: code-group
 
-```ts [worker.js]
+```js [worker.js]
 import { parentPort } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
-import {
-  ESModulesEvaluator,
-  ModuleRunner,
-  RemoteRunnerTransport,
-} from 'vite/module-runner'
+import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
+
+/** @type {import('vite/module-runner').ModuleRunnerTransport} */
+const transport = {
+  connect({ onMessage, onDisconnection }) {
+    parentPort.on('message', onMessage)
+    parentPort.on('close', onDisconnection)
+  },
+  send(data) {
+    parentPort.postMessage(data)
+  },
+}
 
 const runner = new ModuleRunner(
   {
-    root: fileURLToPath(new URL('./', import.meta.url)),
-    transport: new RemoteRunnerTransport({
-      send: (data) => parentPort.postMessage(data),
-      onMessage: (listener) => parentPort.on('message', listener),
-      timeout: 5000,
-    }),
+    transport,
   },
   new ESModulesEvaluator(),
 )
 ```
 
-```ts [server.js]
+```js [server.js]
 import { BroadcastChannel } from 'node:worker_threads'
 import { createServer, RemoteEnvironmentTransport, DevEnvironment } from 'vite'
 
 function createWorkerEnvironment(name, config, context) {
   const worker = new Worker('./worker.js')
-  return new DevEnvironment(name, config, {
-    hot: /* 自定义热更新通道 */,
-    remoteRunner: {
-      transport: new RemoteEnvironmentTransport({
-        send: (data) => worker.postMessage(data),
-        onMessage: (listener) => worker.on('message', listener),
-      }),
+  const handlerToWorkerListener = new WeakMap()
+
+  const workerHotChannel = {
+    send: (data) => worker.postMessage(data),
+    on: (event, handler) => {
+      if (event === 'connection') return
+
+      const listener = (value) => {
+        if (value.type === 'custom' && value.event === event) {
+          const client = {
+            send(payload) {
+              worker.postMessage(payload)
+            },
+          }
+          handler(value.data, client)
+        }
+      }
+      handlerToWorkerListener.set(handler, listener)
+      worker.on('message', listener)
     },
+    off: (event, handler) => {
+      if (event === 'connection') return
+      const listener = handlerToWorkerListener.get(handler)
+      if (listener) {
+        worker.off('message', listener)
+        handlerToWorkerListener.delete(handler)
+      }
+    },
+  }
+
+  return new DevEnvironment(name, config, {
+    transport: workerHotChannel,
   })
 }
 
@@ -305,22 +349,23 @@ await createServer({
 
 :::
 
-`RemoteRunnerTransport` 和 `RemoteEnvironmentTransport` 旨在一起使用，但你完全不必使用它们。你可以定义你自己的函数在运行器和服务器之间进行通信。例如，如果你通过 HTTP 请求连接到环境，你可以在 `fetchModule` 函数中调用 `fetch().json()`：
+使用 HTTP 请求在运行程序和服务器之间进行通信的另一个示例：
 
 ```ts
 import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
 
 export const runner = new ModuleRunner(
   {
-    root: fileURLToPath(new URL('./', import.meta.url)),
     transport: {
-      async fetchModule(id, importer) {
-        const response = await fetch(
-          `http://my-vite-server/fetch?id=${id}&importer=${importer}`,
-        )
+      async invoke(data) {
+        const response = await fetch(`http://my-vite-server/invoke`, {
+          method: 'POST',
+          body: JSON.stringify(data),
+        })
         return response.json()
       },
     },
+    hmr: false, // disable HMR as HMR requires transport.connect
   },
   new ESModulesEvaluator(),
 )
@@ -328,36 +373,22 @@ export const runner = new ModuleRunner(
 await runner.import('/entry.js')
 ```
 
-## ModuleRunnerHMRConnection
-
-**类型签名：**
+在这种情况下，可以使用 `NormalizedHotChannel` 中的 `handleInvoke` 方法：
 
 ```ts
-export interface ModuleRunnerHMRConnection {
-  /**
-   * 是否在向服务器发送消息之前完成检查
-   */
-  isReady(): boolean
-  /**
-   * 向服务器发送消息
-   */
-  send(payload: HotPayload): void
-  /**
-   * 配置当此连接触发更新时如何处理 HMR
-   * 此方法期望连接开始监听 HMR 更新，并在接收到更新时调用此回调
-   */
-  onUpdate(callback: (payload: HotPayload) => void): void
-}
+const customEnvironment = new DevEnvironment(name, config, context)
+
+server.onRequest((request: Request) => {
+  const url = new URL(request.url)
+  if (url.pathname === '/invoke') {
+    const payload = (await request.json()) as HotPayload
+    const result = customEnvironment.hot.handleInvoke(payload)
+    return new Response(JSON.stringify(result))
+  }
+  return Response.error()
+})
 ```
 
-这个接口定义了如何建立 HMR 通信。Vite 从主入口文件导出 `ServerHMRConnector`，以支持在 Vite SSR 期间的 HMR。当触发自定义事件时（比如，`import.meta.hot.send("my-event")`），通常会调用 `isReady` 和 `send` 方法。
+但请注意，要支持 HMR，必须使用 `send` 和 `connect` 方法。`send` 方法通常在触发自定义事件时调用（如`import.meta.hot.send("my-event")`）。
 
-`onUpdate` 只在新的模块运行器启动时调用一次。它传递了一个方法，当连接触发 HMR 事件时应该调用这个方法。实现取决于连接类型（例如，它可以是 `WebSocket`/`EventEmitter`/`MessageChannel`），但通常看起来像这样：
-
-```js
-function onUpdate(callback) {
-  this.connection.on('hmr', (event) => callback(event.data))
-}
-```
-
-回调会排队，它将等待当前更新解决后再处理下一个更新。与浏览器实现不同，模块运行器中的 HMR 更新将等待所有监听器（如，`vite:beforeUpdate`/`vite:beforeFullReload`）完成后再更新模块。
+Vite 从主入口导出 `createServerHotChannel`，以支持 Vite SSR 期间的 HMR。

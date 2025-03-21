@@ -436,9 +436,9 @@ const { startAnimation } = useCardAnimation(
       </svg>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">线上义诊</div>
+      <div class="meta__title">星光服务队</div>
       <div class="meta__description">
-        为大家提供全流程、周到的服务
+        我们怀着传播电脑使用和维护技巧的使命感以及责任感，致力于为同学们解决在电脑使用中遇到的各种难题。
       </div>
     </div>
   </div>
