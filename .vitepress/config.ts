@@ -98,11 +98,6 @@ export default defineConfig({
   themeConfig: {
     logo: '/kjxh.png',
 
-    editLink: {
-      pattern: 'https://github.com/vitejs/docs-cn/edit/main/:path',
-      text: '为此页提供修改建议',
-    },
-
     outline: {
       label: '本页目录',
       level: [2, 3],
@@ -187,7 +182,7 @@ export default defineConfig({
       { text: '电脑推荐', link: '/laptops/', activeMatch: '/laptops/' },
       { text: '软件安装', link: '/softwares/', activeMatch: '/softwares/' },
       { text: '活动', link: '/activities/', activeMatch: '/activities/' },
-      { text: '关于科协', link: '/team', activeMatch: '//team' },
+      { text: '关于科协', link: '/team', activeMatch: '/team' },
     ],
 
     sidebar: {
