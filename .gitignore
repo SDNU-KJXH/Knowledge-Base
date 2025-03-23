@@ -7,6 +7,7 @@ node_modules/
 package-lock.json
 yarn.lock
 .vitepress/dist
+!.vitepress/dist/tencent12099623398521415789.txt
 *.local
 .vitepress/cache
 
