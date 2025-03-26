@@ -310,83 +310,22 @@ export default defineConfig({
           ],
         },
       ],
-      '/config/': [
+      '/activities/': [
         {
-          text: '配置',
+          text: '电脑义诊',
           items: [
             {
-              text: '配置 Vite',
-              link: '/config/'
-            },
-            {
-              text: '共享选项',
-              link: '/config/shared-options'
-            },
-            {
-              text: '服务器选项',
-              link: '/config/server-options'
-            },
-            {
-              text: '构建选项',
-              link: '/config/build-options'
-            },
-            {
-              text: '预览选项',
-              link: '/config/preview-options'
-            },
-            {
-              text: '依赖优化选项',
-              link: '/config/dep-optimization-options'
-            },
-            {
-              text: 'SSR 选项',
-              link: '/config/ssr-options'
-            },
-            {
-              text: 'Worker 选项',
-              link: '/config/worker-options',
-            },
-          ],
-        },
-      ],
-      '/changes/': [
-        {
-          text: '破坏性变更',
-          link: '/changes/',
-        },
-        {
-          text: '现在',
-          items: [],
-        },
-        {
-          text: '未来',
-          items: [
-            {
-              text: '钩子函数中的 this.environment',
-              link: '/changes/this-environment-in-hooks',
-            },
-            {
-              text: 'HMR hotUpdate 插件钩子',
-              link: '/changes/hotupdate-hook',
-            },
-            {
-              text: '迁移到基于环境的API',
-              link: '/changes/per-environment-apis',
-            },
-            {
-              text: '使用 ModuleRunner API 进行服务端渲染',
-              link: '/changes/ssr-using-modulerunner',
-            },
-            {
-              text: '构建过程中的共享插件',
-              link: '/changes/shared-plugins-during-build',
+              text: '2025年3月27日（周四）',
+              link: '/activities/20250327dnyz',
             },
           ],
         },
         {
-          text: '过去',
-          items: [],
-        },
+          text: '电竞赛事',
+          items: [
+            
+          ],
+        }
       ],
     },
   },
