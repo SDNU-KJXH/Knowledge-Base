@@ -113,7 +113,7 @@
     <h3>
       ↓开始探索↓
     </h3>
-    <a href="/guide/" class="btn btn--primary">开始</a>
+    <a href="/team" class="btn btn--primary">开始</a>
     <div class="glow glow--purple" />
     <div class="glow glow--blue" />
   </div>
