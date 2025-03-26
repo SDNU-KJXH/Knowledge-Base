@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Meet the Team
-description: The development of Vite is guided by an international team.
+title: 关于科协
+description: 科协介绍和团队
 ---
 
 <script setup>
@@ -16,29 +16,28 @@ import { core, emeriti, cnTranslator } from './_data/team'
 
 <VPTeamPage>
   <VPTeamPageTitle>
-    <template #title>认识我们的团队</template>
+    <template #title>山东师范大学科技协会</template>
     <template #lead>
-      Vite 目前由一个国际化的团队开发和维护，<br>
-      下面是对一些团队成员的介绍。
+      科技协会成立于1990年5月4日，是信息科学与工程学院学生自发组织的学术性社团。协会成员主要由对技术充满热情的同学组成，旨在通过实践项目和交流活动，共同提升技术能力，营造浓厚的校园科技氛围。
+自成立以来，科技协会已走过34年。在学院老师的指导和支持下，协会不断发展，组织了各类技术讲座、电脑义诊和电竞比赛，为同学们提供了学习和交流的平台。未来，我们将继续努力，为大家带来更多有价值的活动。
     </template>
   </VPTeamPageTitle>
-  <VPTeamMembers :members="core" />
   <VPTeamPageSection>
-    <template #title>中文文档翻译维护者</template>
+    <template #title>QQ群</template>
     <template #lead>
-      官方中文文档目前由以下 Vite 团队成员进行维护。
+      扫码加入我们的QQ群
+      <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=nr1-zhPN5I_bfipzd2LrhbaE0Qvep0Lm&jump_from=webapi&authKey=Y15yWupz7AzJlv7yV+uHXdtq1dc6bGSTQ2rm6PI3i++AILuj99k51oTfKDq2NoEr"><img src="./public/qrcode.jpg" height="100px"></a>
     </template>
-    <template #members>
-      <VPTeamMembers size="small" :members="cnTranslator" />
-    </template>
+
   </VPTeamPageSection>
   <VPTeamPageSection>
-    <template #title>团队荣誉会员</template>
+    <template #title>社团活动</template>
     <template #lead>
-      我们在此处向一些目前暂时不再活跃的团队成员致敬，他们在过去做出了宝贵的贡献。
-    </template>
-    <template #members>
-      <VPTeamMembers size="small" :members="emeriti" />
+      科协举办电脑义诊、电竞赛事、技术讲座等活动。<br><br>
+      <strong>电脑义诊</strong><br>
+      <img src="./public/dnyz.png"><br>
+      <strong>电竞赛事</strong>
+      <img src="./public/dj.png">
     </template>
   </VPTeamPageSection>
 </VPTeamPage>
